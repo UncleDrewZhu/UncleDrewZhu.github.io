@@ -12,7 +12,7 @@ github_repo: "https://github.com/UncleDrewZhu/UncleDrewZhu.github.io.git" # you 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "work hard, play hard!"
-sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/my-image.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
