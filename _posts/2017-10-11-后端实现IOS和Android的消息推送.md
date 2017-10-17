@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      后端实现 IOS 和 Android 的消息推送
-subtitle:   基于Spring boot 框架实现 IOS 和 Android 的消息推送
+subtitle:   基于 Spring boot 框架实现 IOS 和 Android 的消息推送
 date:       2017-10-11
 author:     uncledrewzhu
 header-img: img/post-bg-re-vs-ng2.jpg
@@ -334,6 +334,6 @@ public void sendSingleMessage(RequestBean requestBean) {
 
 4. Spring boot 的推送项目一定要做好安全策略。
     - Http header 中增加 Authorization 认证。
-    - 用户token的生成使用jsonwebtoken包下面的JwtBuilder。Jwt使用的是HS256的加密方式。
-    - 用户密码的存储推荐使用PBKDF2的加密方式。
+    - 用户 token 的生成使用 jsonwebtoken 包下面的 JwtBuilder。 Jwt 使用的是 HS256 的加密方式。
+    - 用户密码的存储推荐使用 PBKDF2 的加密方式。
 
