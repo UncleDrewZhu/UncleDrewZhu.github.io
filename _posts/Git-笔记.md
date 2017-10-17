@@ -1,5 +1,25 @@
-# 主要是整理一些自己工作上和网上看到的关于Git好的资料。
+---
+layout:     post
+title:      Git 笔记
+subtitle:   整理一些自己工作上和网上看到的关于Git好的资料
+date:       2017-10-14
+author:     uncledrewzhu
+header-img: img/post-bg-re-vs-ng2.jpg
+catalog: true
+tags:
+    - Git
+    - 分支
+    - 版本控制
+---
 
+> 纸上得来终觉浅，绝知此事要躬行。
+>
+> [我的博客](http://uncledrewzhu.github.io/)
+
+# 前言
+主要是整理一些自己工作上和网上看到的关于Git好的资料。
+
+# 目录
 Git 版本控制的工作流程
 Git 安装，在 Linux 上安装
 Git 获取帮助
