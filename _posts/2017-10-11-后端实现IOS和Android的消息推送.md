@@ -3,7 +3,7 @@ layout:     post
 title:      后端实现 IOS 和 Android 的消息推送
 subtitle:   基于 Spring boot 框架实现 IOS 和 Android 的消息推送
 date:       2017-10-11
-author:     uncledrewzhu
+author:     uncledrew
 header-img: img/post-bg-re-vs-ng2.jpg
 catalog: true
 tags:
