@@ -233,6 +233,12 @@ public class ControllerDemo {
 JavaPoet 框架中最基础的 API 接口，都可以参考 GitHab 上的 [square/javapoet](https://github.com/square/javapoet)这篇文章。
 这里面有详细的介绍和教程，基本上覆盖了一个 Java 源文件中所涉及的所有语法语句。
 
+四个常用标签：
+- $L：替换一串文字  `("int i = $L", 1)` -> `(int i = 1;)`
+- $S：替换一个字符串  `("String s = $S", "drew")` -> `(String s = "drew";)`
+- $T：替换一个类型  `("return new $T()", Date.class)` -> `(return new Date();)`
+- $N：替换一个其名称生成的另一个声明  `MethodSpec fun = ....; (String result = $N()", fun)` -> `String result = fun();`
+
 四个常用类：
 - MethodSpec：声明一个构造函数或方法
 - TypeSpec：声明一个类、接口或者枚举
