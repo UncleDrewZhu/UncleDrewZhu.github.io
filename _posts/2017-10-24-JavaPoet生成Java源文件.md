@@ -236,7 +236,7 @@ JavaPoet 框架中最基础的 API 接口，都可以参考 GitHab 上的 [squar
 四个常用类：
 - MethodSpec：声明一个构造函数或方法
 - TypeSpec：声明一个类、接口或者枚举
-- FieldSpec：声明一个成员变量，一个字段
+- FieldSpec：声明一个成员变量或者一个字段
 - JavaFile：声明一个顶级类的 Java 文件
 
 # Maven 项目如何引入 JavaPoet
