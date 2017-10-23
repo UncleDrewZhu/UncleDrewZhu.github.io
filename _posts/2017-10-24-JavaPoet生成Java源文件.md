@@ -230,7 +230,7 @@ public class ControllerDemo {
 翻译过来就是 `JavaPoet 是生成 Java 源文件的一个API.`
 
 # JavaPoet 如何使用
-JavaPoet 框架中最基础的 API 接口，都可以参考 GitHab 上的 [square/javapoet](https://github.com/square/javapoet)这篇文章。
+JavaPoet 框架中最基础的 API 接口，都可以参考 GitHab 上的 [square/javapoet](https://github.com/square/javapoet) 这篇文章。
 这里面有详细的介绍和教程，基本上覆盖了一个 Java 源文件中所涉及的所有语法语句。
 
 四个常用标签：
