@@ -231,15 +231,15 @@ public class ControllerDemo {
 
 # JavaPoet 如何使用
 JavaPoet 框架中最基础的 API 接口，都可以参考 GitHab 上的 [square/javapoet](https://github.com/square/javapoet)这篇文章。
-这里面有详细的介绍和教程，基本上覆盖了一个 JAVA 源文件中所涉及的所有语法语句。
+这里面有详细的介绍和教程，基本上覆盖了一个 Java 源文件中所涉及的所有语法语句。
 
 四个常用类：
 - MethodSpec：声明一个构造函数或方法
-- TypeSpec：声明一个类、借口或者枚举
+- TypeSpec：声明一个类、接口或者枚举
 - FieldSpec：声明一个成员变量，一个字段
 - JavaFile：声明一个顶级类的 Java 文件
 
-# maven 项目如何引入 JavaPoet
+# Maven 项目如何引入 JavaPoet
 ```
 <dependency>
     <groupId>com.squareup</groupId>
