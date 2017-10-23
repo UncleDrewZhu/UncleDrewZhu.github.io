@@ -8,9 +8,7 @@ header-img: img/post-bg-re-vs-ng2.jpg
 catalog: true
 tags:
     - Spring
-    - Annotation
-    - 注解
-    - 枚举
+    - JavaPoet
 ---
 
 > 纸上得来终觉浅，绝知此事要躬行。
@@ -19,7 +17,7 @@ tags:
 
 # 先看两个例子
 
-#### 生成一个枚举
+#### 生成一个枚举类
 
 代码：
 ```
@@ -116,7 +114,7 @@ public interface EnumDemo {
 }
 ```
 
-#### 生成一个控制器
+#### 生成一个 Spring 控制器类
 
 代码：
 ```
@@ -171,7 +169,7 @@ public class ControllerGenerator {
             .addModifiers(Modifier.PUBLIC)
             .addAnnotation(Controller.class)
             .addAnnotation(AnnotationSpec.builder(RequestMapping.class)
-                .addMember("value", "$S", "/app/api/UserManage")
+                .addMember("value", "$S", "/UserManage")
                 .build())
             .addField(fun16)
             .addMethod(methodSpec)
