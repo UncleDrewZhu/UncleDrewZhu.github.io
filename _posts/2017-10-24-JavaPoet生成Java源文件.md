@@ -88,7 +88,7 @@ import java.lang.Override;
 import java.lang.String;
 
 public interface EnumDemo {
-  enum Coffee implements Fun21 {
+  enum Coffee implements EnumDemo {
     BLACK_COFFEE,
 
     DECAF_COFFEE,
@@ -96,7 +96,7 @@ public interface EnumDemo {
     LATTE
   }
 
-  enum Light implements Fun21 {
+  enum Light implements EnumDemo {
     RED("RED"),
 
     YELLOW("YELLOW");
