@@ -195,17 +195,17 @@ public class SystemLoggingFilter implements Filter {
 
 # Java 内存机制
 
-(JAVA中堆和栈的区别)[http://www.cnblogs.com/perfy/p/3820594.html]
+[JAVA中堆和栈的区别](http://www.cnblogs.com/perfy/p/3820594.html)
 
-(java堆、栈、堆栈的区别)[http://www.cnblogs.com/iliuyuet/p/5603618.html]
+[java堆、栈、堆栈的区别](http://www.cnblogs.com/iliuyuet/p/5603618.html)
 
-(内存机制)[http://www.cnblogs.com/panxuejun/p/5883264.html]
+[内存机制](http://www.cnblogs.com/panxuejun/p/5883264.html)
 
-(java内存溢出示例(堆溢出、栈溢出))[http://www.cnblogs.com/panxuejun/p/5882424.html]
+[java内存溢出示例(堆溢出、栈溢出)](http://www.cnblogs.com/panxuejun/p/5882424.html)
 
-(java内存泄漏与内存溢出)[http://www.cnblogs.com/panxuejun/p/5883044.html]
+[java内存泄漏与内存溢出](http://www.cnblogs.com/panxuejun/p/5883044.html)
 
-(java 内存溢出 栈溢出的原因与排查方法)[http://www.cnblogs.com/panxuejun/p/5882309.html]
+[java 内存溢出 栈溢出的原因与排查方法](http://www.cnblogs.com/panxuejun/p/5882309.html)
 
 
 - 栈(stack)：是一个先进后出的数据结构，通常用于保存方法(函数)中的参数，局部变量。
