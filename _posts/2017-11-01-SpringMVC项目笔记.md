@@ -8,6 +8,7 @@ header-img: img/post-bg-re-vs-ng2.jpg
 catalog: true
 tags:
     - Spring
+    - 性能测试
 ---
 
 > 纸上得来终觉浅，绝知此事要躬行。
@@ -19,12 +20,12 @@ tags:
 在 `beans-aop-config.xml` 中添加
 
 ```
-	<bean id="performanceMonitor" class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor" />
+<bean id="performanceMonitor" class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor" />
 
-	<aop:config>
-		<aop:pointcut id="allServiceMethods" expression="execution(* com.lfzhu.*.service.*.*(..))" />
-		<aop:advisor pointcut-ref="allServiceMethods" advice-ref="performanceMonitor" order="1" />
-	</aop:config>
+<aop:config>
+    <aop:pointcut id="allServiceMethods" expression="execution(* com.lfzhu.*.service.*.*(..))" />
+    <aop:advisor pointcut-ref="allServiceMethods" advice-ref="performanceMonitor" order="1" />
+</aop:config>
 ```
 
 #### Logback 存储性能测试结果
@@ -72,3 +73,5 @@ tags:
 ```
 
 文件中的每一条日志表示一个接口执行的速度，我们可以针对速度慢的服务进行性能优化。
+
+# Logback 生成日志时标示宿主主机信息
