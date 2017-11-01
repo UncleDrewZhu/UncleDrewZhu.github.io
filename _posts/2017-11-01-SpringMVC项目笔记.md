@@ -190,6 +190,6 @@ public class SystemLoggingFilter implements Filter {
 </filter-mapping>
 ```
 
-如果这样配置，我们在 `SystemLoggingFilter` 类中是***不能***执行接口注入的操作(`@Autowired`)，因为它不是一个 Bean。
+如果这样配置，我们在 `SystemLoggingFilter` 类中是 ***不能*** 执行接口注入的操作(`@Autowired`)，因为它不是一个 Bean。
 
 
