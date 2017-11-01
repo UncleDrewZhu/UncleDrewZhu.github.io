@@ -193,3 +193,27 @@ public class SystemLoggingFilter implements Filter {
 如果这样配置，我们在 `SystemLoggingFilter` 类中是 ***不能*** 执行接口注入的操作(`@Autowired`)，因为它不是一个 Bean。
 
 
+# Java 内存机制
+
+(JAVA中堆和栈的区别)[http://www.cnblogs.com/perfy/p/3820594.html]
+
+(java堆、栈、堆栈的区别)[http://www.cnblogs.com/iliuyuet/p/5603618.html]
+
+(内存机制)[http://www.cnblogs.com/panxuejun/p/5883264.html]
+
+(java内存溢出示例(堆溢出、栈溢出))[http://www.cnblogs.com/panxuejun/p/5882424.html]
+
+(java内存泄漏与内存溢出)[http://www.cnblogs.com/panxuejun/p/5883044.html]
+
+(java 内存溢出 栈溢出的原因与排查方法)[http://www.cnblogs.com/panxuejun/p/5882309.html]
+
+
+- 栈(stack)：是一个先进后出的数据结构，通常用于保存方法(函数)中的参数，局部变量。
+在 Java 中，所有基本类型(int, short, long, byte, float, double, boolean, char)和引用类型都在栈中存储。
+栈中数据的生存空间一般在当前 scopes 内(就是由{...}括起来的区域)。 ***局部变量放在堆栈中。***
+
+- 堆(heap)：是一个可动态申请的内存空间(其记录空闲内存空间的链表由操作系统维护)。
+在 Java 中，所有包装类数据(Integer, String, Double)和使用 new xxx() 构造出来的对象都在堆中存储。 ***静态和全局变量，new 得到的变量，都放在堆中。***
+当垃圾回收器检测到某对象未被引用，则自动销毁该对象。所以，理论上说 Java 中对象的生存空间是没有限制的,只要有引用类型指向它，则它就可以在任意地方被使用。 
+
+#
