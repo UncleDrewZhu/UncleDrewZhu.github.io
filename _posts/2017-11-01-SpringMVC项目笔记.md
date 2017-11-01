@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      SpringMVC 项目笔记
+title:      SpringMVC 项目笔记(持续更新)
 subtitle:   针对平时做过的项目记一些笔记
 date:       2017-11-01
 author:     uncledrew
