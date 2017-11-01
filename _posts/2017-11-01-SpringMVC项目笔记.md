@@ -143,6 +143,8 @@ public class LogbackHostName extends PropertyDefinerBase {
 <bean id="loggingFilter" class="com.lfzhu.common.filter.SystemLoggingFilter"/>
 ```
 
+(Spring的Bean之Bean的基本概念)[http://www.cnblogs.com/chenssy/archive/2012/11/25/2787710.html]
+
 #### 实现过滤器(filter)逻辑
 
 ```
