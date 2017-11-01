@@ -75,3 +75,119 @@ tags:
 文件中的每一条日志表示一个接口执行的速度，我们可以针对速度慢的服务进行性能优化。
 
 # Logback 生成日志时标示宿主主机信息
+#### 在 Logback 中定义变量
+在 `logback.xml` 中添加
+
+```
+<define  name="HostName" class="com.lfzhu.logback.LogbackHostName" />
+
+<appender>
+    <encoder>
+        <pattern>${HostName} - %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{35} - %msg%n
+        </pattern>
+    </encoder>
+</appender>
+
+```
+
+#### 实现变量取值逻辑
+
+```
+public class LogbackHostName extends PropertyDefinerBase {
+
+    @Bean
+    public String getPropertyValue() {
+        String info = "UnknownHost";
+        try {
+            Process pro = Runtime.getRuntime().exec("hostname");
+            pro.waitFor();
+            InputStream in = pro.getInputStream();
+            BufferedReader read = new BufferedReader(new InputStreamReader(in));
+            info = read.readLine();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return info;
+
+    }
+}
+```
+
+#### Spring 容器预初始化 LogbackHostName 这个 Bean
+在 `applicationContext.xml` 中添加
+
+```
+<bean id="logbackHostName" class="com.lfzhu.logback.LogbackHostName"/>
+```
+
+# 让过滤器(filter)成为一个 Bean
+#### web.xml 配置 DelegatingFilterProxy
+
+```
+<filter>
+    <filter-name>loggingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>loggingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
+#### Spring 容器预初始化 loggingFilter 这个 Bean
+
+在 `applicationContext.xml` 中添加
+
+```
+<bean id="loggingFilter" class="com.lfzhu.common.filter.SystemLoggingFilter"/>
+```
+
+#### 实现过滤器(filter)逻辑
+
+```
+@Service
+public class SystemLoggingFilter implements Filter {
+
+    @Autowired
+    private KafkaProduceService kafkaProduceService;
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+        throws IOException, ServletException {
+        chain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
+}
+```
+
+在这里，我们可以在 `SystemLoggingFilter` 类中执行接口注入的操作(`@Autowired`)。
+
+#### 普通过滤器(filter)的实现方式
+在 `web.xml` 中添加
+
+```
+<filter>
+    <filter-name>loggingFilter</filter-name>
+    <filter-class>com.lfzhu.common.filter.SystemLoggingFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>loggingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
+如果这样配置，我们在 `SystemLoggingFilter` 类中是***不能***执行接口注入的操作(`@Autowired`)，因为它不是一个 Bean。
+
+
