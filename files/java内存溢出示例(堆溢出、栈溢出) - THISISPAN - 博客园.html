@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://www.cnblogs.com/panxuejun/p/5882424.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/bundle-LessIsMoreRight.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/bundle-LessIsMoreRight-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/panxuejun/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/panxuejun/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/panxuejun/wlwmanifest.xml">
+<script async="" src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/analytics.js"></script><script type="text/javascript" src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/encoder.js"></script><script src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'panxuejun', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/panxuejun/">THISISPAN</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/panxuejun/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/THISISPAN">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/panxuejun/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/panxuejun/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-961&nbsp;
+文章-2&nbsp;
+评论-67&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/panxuejun/p/5882424.html">java内存溢出示例(堆溢出、栈溢出)</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p><strong>堆溢出</strong>：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">/*</span><span style="color: #008000;">*
+
+* @author LXA
+
+* 堆溢出
+
+</span><span style="color: #008000;">*/</span>
+
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Heap
+
+{
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args)
+
+    {
+
+        ArrayList list</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> ArrayList();
+
+        </span><span style="color: #0000ff;">while</span>(<span style="color: #0000ff;">true</span><span style="color: #000000;">)
+
+        {
+
+            list.add(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Heap());
+
+        }
+
+    }
+
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>报错：</p>
+<p>java.lang.OutOfMemoryError: Java heap space</p>
+<p>&nbsp;</p>
+<p><strong>栈溢出</strong>：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">/*</span><span style="color: #008000;">*
+
+* @author LXA
+
+* 栈溢出
+
+</span><span style="color: #008000;">*/</span>
+
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Stack
+
+{
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args)
+
+    {
+
+        </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Stack().test();
+
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> test()
+
+    {
+
+        test();
+
+    }
+
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>报错：</p>
+<p>java.lang.StackOverflowError</p>
+<p>&nbsp;</p>
+<p><strong>Java内存管理机制</strong></p>
+<p>在C++ 语言中，如果需要动态分配一块内存，程序员需要负责这块内存的整个生命周期。从申请分配、到使用、再到最后的释放。这样的过程非常灵活，但是却十分繁琐，程序员很容易由于疏忽而忘记释放内存，从而导致内存的泄露。 Java 语言对内存管理做了自己的优化，这就是垃圾回收机制。 Java 的几乎所有内存对象都是在堆内存上分配（基本数据类型除外），然后由 GC （ garbage collection）负责自动回收不再使用的内存。</p>
+<p>上面是Java 内存管理机制的基本情况。但是如果仅仅理解到这里，我们在实际的项目开发中仍然会遇到内存泄漏的问题。也许有人表示怀疑，既然 Java 的垃圾回收机制能够自动的回收内存，怎么还会出现内存泄漏的情况呢？这个问题，我们需要知道 GC 在什么时候回收内存对象，什么样的内存对象会被 GC 认为是“不再使用”的。</p>
+<p>Java中对内存对象的访问，使用的是引用的方式。在 Java 代码中我们维护一个内存对象的引用变量，通过这个引用变量的值，我们可以访问到对应的内存地址中的内存对象空间。在 Java 程序中，这个引用变量本身既可以存放堆内存中，又可以放在代码栈的内存中（与基本数据类型相同）。 GC 线程会从代码栈中的引用变量开始跟踪，从而判定哪些内存是正在使用的。如果 GC 线程通过这种方式，无法跟踪到某一块堆内存，那么 GC 就认为这块内存将不再使用了（因为代码中已经无法访问这块内存了）。</p>
+<p>&nbsp;</p>
+<p><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/330611-20160918171942953-1947458594.png" alt=""></p>
+<p>通过这种有向图的内存管理方式，当一个内存对象失去了所有的引用之后，GC 就可以将其回收。反过来说，如果这个对象还存在引用，那么它将不会被 GC 回收，哪怕是 Java 虚拟机抛出 OutOfMemoryError 。</p>
+<p>&nbsp;</p>
+<p><strong>Java内存泄露</strong></p>
+<p>一般来说内存泄漏有两种情况。一种情况如在C/C++ 语言中的，在堆中的分配的内存，在没有将其释放掉的时候，就将所有能访问这块内存的方式都删掉（如指针重新赋值）；另一种情况则是在内存对象明明已经不需要的时候，还仍然保留着这块内存和它的访问方式（引用）。第一种情况，在 Java 中已经由于垃圾回收机制的引入，得到了很好的解决。所以， Java 中的内存泄漏，主要指的是第二种情况。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>Vector v = <span style="color: #0000ff;">new</span>  Vector( <span style="color: #800080;">10</span><span style="color: #000000;"> );  
+ </span><span style="color: #0000ff;">for</span>  ( <span style="color: #0000ff;">int</span>  i = <span style="color: #800080;">1</span> ;i &lt; <span style="color: #800080;">100</span> ; i ++<span style="color: #000000;"> ){  
+ Object o </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;">  Object();  
+ v.add(o);  
+ o </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;"> ;  
+ }</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>在这个例子中，代码栈中存在Vector 对象的引用 v 和 Object 对象的引用 o 。在 For 循环中，我们不断的生成新的对象，然后将其添加到 Vector 对象中，之后将 o 引用置空。问题是当 o 引用被置空后，如果发生 GC ，我们创建的 Object 对象是否能够被 GC 回收呢？答案是否定的。因为， GC 在跟踪代码栈中的引用时，会发现 v 引用，而继续往下跟踪，就会发现 v 引用指向的内存空间中又存在指向 Object 对象的引用。也就是说尽管 o 引用已经被置空，但是 Object 对象仍然存在其他的引用，是可以被访问到的，所以 GC 无法将其释放掉。如果在此循环之后， Object 对象对程序已经没有任何作用，那么我们就认为此 Java 程序发生了内存泄漏。</p>
+<p>&nbsp;</p>
+<p>尽管对于C/C++ 中的内存泄露情况来说， Java 内存泄露导致的破坏性小，除了少数情况会出现程序崩溃的情况外，大多数情况下程序仍然能正常运行。但是，在移动设备对于内存和 CPU都有较严格的限制的情况下， Java 的内存溢出会导致程序效率低下、占用大量不需要的内存等问题。这将导致整个机器性能变差，严重的也会引起抛出 OutOfMemoryError ，导致程序崩溃。</p>
+<p><strong>一般情况下内存泄漏的避免</strong></p>
+<p>在不涉及复杂数据结构的一般情况下，Java 的内存泄露表现为一个内存对象的生命周期超出了程序需要它的时间长度。我们有时也将其称为“对象游离”。</p>
+<p>&nbsp;</p>
+<p>在这段代码中，FileSearch 类中有一个函数 hasString ，用来判断文档中是否含有指定的字符串。流程是先将mFile 加载到内存中，然后进行判断。但是，这里的问题是，将 content 声明为了实例变量，而不是本地变量。于是，在此函数返回之后，内存中仍然存在整个文件的数据。而很明显，这些数据我们后续是不再需要的，这就造成了内存的无故浪费。</p>
+<p>&nbsp;</p>
+<p>要避免这种情况下的内存泄露，要求我们以C/C++ 的内存管理思维来管理自己分配的内存。第一，是在声明对象引用之前，明确内存对象的有效作用域。在一个函数内有效的内存对象，应该声明为 local 变量，与类实例生命周期相同的要声明为实例变量……以此类推。第二，在内存对象不再需要时，记得手动将其引用置空。</p>
+<p>&nbsp;</p>
+<p><strong>Java中的几种引用方式</strong></p>
+<p>Java中有几种不同的引用方式，它们分别是：强引用、软引用、弱引用和虚引用。下面，我们首先详细地了解下这几种引用方式的意义。</p>
+<p><strong>强引用</strong></p>
+<p>在此之前我们介绍的内容中所使用的引用 都是强引用，这是使用最普遍的引用。如果一个对象具有强引用，那就类似于必不可少的生活用品，垃圾回收器绝不会回收它。当内存空 间不足，Java 虚拟机宁愿抛出 OutOfMemoryError 错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足问题。</p>
+<p><strong>软引用（SoftReference ）</strong></p>
+<p>SoftReference 类的一个典型用途就是用于内存敏感的高速缓存。 SoftReference&nbsp; 的原理是：在保持对对象的引用时保证在&nbsp; JVM&nbsp; 报告内存不足情况之前将清除所有的软引用。关键之处在于，垃圾收集器在运行时可能会（也可能不会）释放软可及对象。对象是否被释放取决于垃圾收集器的算法 以及垃圾收集器运行时可用的内存数量。</p>
+<p><strong>弱引用（WeakReference ）</strong></p>
+<p>WeakReference 类的一个典型用途就是规范化映射（ canonicalized mapping ）。另外，对于那些生存期相对较长而且重新创建的开销也不高的对象来说，弱引用也比较有用。关键之处在于，垃圾收集器运行时如果碰到了弱可及对象，将释放&nbsp; WeakReference&nbsp; 引用的对象。然而，请注意，垃圾收集器可能要运行多次才能找到并释放弱可及对象。</p>
+<p><strong>虚引用（PhantomReference ）</strong></p>
+<p>PhantomReference 类只能用于跟踪对被引用对象即将进行的收集。同样，它还能用于执行&nbsp; pre-mortem&nbsp; 清除操作。 PhantomReference&nbsp; 必须与&nbsp; ReferenceQueue&nbsp; 类一起使用。需要&nbsp; ReferenceQueue&nbsp; 是因为它能够充当通知机制。当垃圾收集器确定了某个对象是虚可及对象时， PhantomReference&nbsp; 对象就被放在它的&nbsp; ReferenceQueue&nbsp; 上。将&nbsp; PhantomReference&nbsp; 对象放在&nbsp; ReferenceQueue&nbsp; 上也就是一个通知，表明&nbsp; PhantomReference&nbsp; 对象引用的对象已经结束，可供收集了。这使您能够刚好在对象占用的内存被回收之前采取行动。 Reference与 ReferenceQueue 的配合使用。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/panxuejun/tag/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">java内存模型</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5882424,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;60065a99-49d9-e011-8ee0-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/panxuejun/" target="_blank"><img src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/panxuejun/">THISISPAN</a><br>
+            <a href="http://home.cnblogs.com/u/panxuejun/followees">关注 - 23</a><br>
+            <a href="http://home.cnblogs.com/u/panxuejun/followers">粉丝 - 39</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;60065a99-49d9-e011-8ee0-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5882424,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(5882424,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/panxuejun/p/5882309.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/panxuejun/p/5882309.html" title="发布于2016-09-18 17:12">java 内存溢出 栈溢出的原因与排查方法</a><br><a href="http://www.cnblogs.com/panxuejun/p/5883044.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/panxuejun/p/5883044.html" title="发布于2016-09-18 21:08">java内存泄漏与内存溢出</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2016-09-18 17:38</span> <a href="http://www.cnblogs.com/panxuejun/">THISISPAN</a> 阅读(<span id="post_view_count">9828</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5882424" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/panxuejun/p/5882424.html#" onclick="AddToWz(5882424);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=115561,cb_entryId=5882424,cb_blogApp=currentBlogApp,cb_blogUserGuid='60065a99-49d9-e011-8ee0-842b2b196315',cb_entryCreatedDate='2016/9/18 17:38:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/panxuejun/p/5882424.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/panxuejun/p/5882424.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://group.cnblogs.com/topic/77995.html" target="_blank">【活动】阿里云双11活动开始预热 云服务器限时2折起</a><br><a href="http://click.aliyun.com/m/33696/" target="_blank">【调查】有奖调研即刻参与，你竟然是酱紫程序猿！</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="http://www.gcpowertools.com.cn/products/activereports_overview.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank"><img width="300" height="250" src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/24442-20171031213643701-1551350337.jpg" alt="葡萄城"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/581540/" target="_blank">Herb Sutter访谈：C++17尘埃落定</a><br> ·  <a href="http://news.cnblogs.com/n/581541/" target="_blank">你的朋友圈被京东家电红砸晕了吗？</a><br> ·  <a href="http://news.cnblogs.com/n/581539/" target="_blank">英特尔宣布为2018年韩国冬奥会提供5G网络支持</a><br> ·  <a href="http://news.cnblogs.com/n/581537/" target="_blank">优信集团上线“优信新车一成购”，打通汽车全生命周期产业链</a><br> ·  <a href="http://news.cnblogs.com/n/581536/" target="_blank">“抖音”内测直播功能，短视频VS直播，一场和谐的抢地盘游戏</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/32986/" target="_blank"><img width="468" height="60" src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/24442-20171027070203758-1397753435.jpg" alt="阿里云双11"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/578502/" target="_blank">为什么你参加了那么多培训，却依然表现平平？</a><br> ·  <a href="http://kb.cnblogs.com/page/579832/" target="_blank">写给初学前端工程师的一封信</a><br> ·  <a href="http://kb.cnblogs.com/page/579480/" target="_blank">实用VPC虚拟私有云设计原则</a><br> ·  <a href="http://kb.cnblogs.com/page/576251/" target="_blank">如何阅读计算机科学类的书</a><br> ·  <a href="http://kb.cnblogs.com/page/578103/" target="_blank">Google 及其云智慧</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div align="center"><a href="http://www.amazingcounters.com/"><img border="0" src="./java内存溢出示例(堆溢出、栈溢出) - THISISPAN - 博客园_files/counter.php" alt="AmazingCounters.com"></a></div><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/panxuejun/">THISISPAN</a><br>园龄：<a href="http://home.cnblogs.com/u/panxuejun/" title="入园时间：2011-09-07">6年1个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/panxuejun/followers/">39</a><br>关注：<a href="http://home.cnblogs.com/u/panxuejun/followees/">23</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;60065a99-49d9-e011-8ee0-842b2b196315&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/10/01&#39;);return false;">&lt;</a></td><td align="center">2017年11月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/12/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td class="CalTodayDay" align="center"><a href="http://www.cnblogs.com/panxuejun/archive/2017/11/01.html"><u>1</u></a></td><td align="center">2</td><td align="center">3</td><td class="CalWeekendDay" align="center">4</td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td class="CalWeekendDay" align="center">11</td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td class="CalWeekendDay" align="center">18</td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalWeekendDay" align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td></tr><tr><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/panxuejun/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/panxuejun/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/panxuejun/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/panxuejun/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/panxuejun/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/panxuejun/tag/java%E5%9F%BA%E7%A1%80/">java基础</a>(207)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/java%20web/">java web</a>(193)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/mysql/">mysql</a>(119)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">性能分析</a>(87)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/mybatis/">mybatis</a>(57)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/spring/">spring</a>(36)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">java多线程</a>(31)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/bug%E6%B1%87%E6%80%BB/">bug汇总</a>(30)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/maven/">maven</a>(27)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/redis/">redis</a>(20)</li><li><a href="http://www.cnblogs.com/panxuejun/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/panxuejun/archive/2017/11.html">2017年11月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/panxuejun/archive/2017/10.html">2017年10月 (48)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/panxuejun/archive/2017/09.html">2017年9月 (43)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/panxuejun/archive/2017/08.html">2017年8月 (45)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/panxuejun/archive/2017/07.html">2017年7月 (43)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/panxuejun/archive/2017/06.html">2017年6月 (34)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/panxuejun/archive/2017/05.html">2017年5月 (23)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/panxuejun/archive/2017/04.html">2017年4月 (60)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/panxuejun/archive/2017/03.html">2017年3月 (26)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/panxuejun/archive/2017/02.html">2017年2月 (41)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/panxuejun/archive/2017/01.html">2017年1月 (22)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/panxuejun/archive/2016/12.html">2016年12月 (155)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/panxuejun/archive/2016/11.html">2016年11月 (166)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/panxuejun/archive/2016/10.html">2016年10月 (139)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/panxuejun/archive/2016/09.html">2016年9月 (116)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/panxuejun/p/5851622.html#3817155">1. Re:Mybatis返回list&lt;object&gt;方法</a></li>
+        <li class="recent_comment_body">Mybatis返回list方法- THISISPAN - 博客园，写的不错不错，收藏了。推荐下，分库分表中间件 Sharding-JDBC 源码解析 17 篇：&amp;602墀...</li>
+        <li class="recent_comment_author">--final变量</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/panxuejun/p/6134700.html#3791965">2. Re:mysql安装过程mysql本地环境变量的配置</a></li>
+        <li class="recent_comment_body">请教一下这些路径之间的关系</li>
+        <li class="recent_comment_author">--聚亿夏</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/panxuejun/p/7300306.html#3771193">3. Re:单例模式再次理解</a></li>
+        <li class="recent_comment_body">Main方法作为启动入口，虚拟机会最先加载这个类，进行class对象生成，static初始化</li>
+        <li class="recent_comment_author">--THISISPAN</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/panxuejun/p/7300306.html#3771192">4. Re:单例模式再次理解</a></li>
+        <li class="recent_comment_body">Static修饰的数据不属于任何对象，是属于全局的，属于整个类的</li>
+        <li class="recent_comment_author">--THISISPAN</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/panxuejun/p/7272825.html#3764751">5. Re:session知识点总结</a></li>
+        <li class="recent_comment_body">你操作的session只是你的session，就是你自己的cocurrwnthashmap对象，不是神马共用的session。每个人操控的都是自己的session对象，都是自己的那个cocureent......</li>
+        <li class="recent_comment_author">--THISISPAN</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/panxuejun/p/5851622.html">1. Mybatis返回list&lt;object&gt;方法(35252)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/6134700.html">2. mysql安装过程mysql本地环境变量的配置(23929)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/6094711.html">3. 第三方微信接入登录流程整理(19056)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/5958875.html">4. java中HashMap的用法(17250)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/6184072.html">5. maven中GroupID 和ArtifactID怎么写(13707)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/panxuejun/p/6407004.html">1. 3(7)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/5993883.html">2. spring aop环绕通知(5)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/5998694.html">3. spring事物的传播行为(4)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/6387807.html">4. 12341432(3)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/6217454.html">5. MyBatis传入参数为集合 list 数组 map写法(3)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/panxuejun/p/6094790.html">1. 基于RPC原理的dubbo(4)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/5975753.html">2. mysql表的一对一/一对多/多对多联系(2)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/5850599.html">3. org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection(2)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/6184072.html">4. maven中GroupID 和ArtifactID怎么写(2)</a></li><li><a href="http://www.cnblogs.com/panxuejun/p/6137698.html">5. mysql设置datetime默认值为now(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2017 THISISPAN
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

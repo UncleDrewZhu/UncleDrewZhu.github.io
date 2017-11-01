@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.cnblogs.com/iliuyuet/p/5603618.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>java堆、栈、堆栈的区别 - liuyueyue - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/bundle-green.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/bundle-green-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/iliuyuet/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/iliuyuet/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/iliuyuet/wlwmanifest.xml">
+<script async="" src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/analytics.js"></script><script src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'iliuyuet', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<table align="center" width="90%" cellspacing="0" cellpadding="5" border="0" bgcolor="white" style="border-bottom: solid 1px #CCCCCC">
+    <tbody><tr>
+        <td colspan="2" class="banner" background="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/bg_banner.jpg">
+            
+<div id="header">
+	<span>
+		<a id="Header2_HeaderTitle" href="http://www.cnblogs.com/iliuyuet/">liuyueyue</a><br>
+		<div class="sub">技术之路最公平也最残酷的原因是：没有捷径，需要日积月累的积累，以及对技术持久的热情。</div>
+	</span>
+</div>
+        </td>
+    </tr>
+    
+        <tr>
+            <td style="padding-left: 10px" height="35">
+                
+<div id="menu_mylinks">
+<a id="blog_nav_sitehome" class="listitem" href="http://www.cnblogs.com/">博客园</a>
+<a id="blog_nav_myhome" class="listitem" href="http://www.cnblogs.com/iliuyuet/">首页</a> 
+<a id="blog_nav_newpost" class="listitem" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> 
+<!--<a id="MyLinks2_NewArticleLink" class="listitem" href="/EnterMyBlog.aspx?NewArticle=1">新文章</a>-->
+<a id="blog_nav_contact" accesskey="9" class="listitem" rel="nofollow" href="https://msg.cnblogs.com/send/liuyueyue">联系</a>
+<a id="blog_nav_rss" class="listitem" href="http://www.cnblogs.com/iliuyuet/rss">订阅</a>
+<a id="blog_nav_rss_image" href="http://www.cnblogs.com/iliuyuet/rss"><img src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/xml.gif" alt="订阅"></a>
+<a id="blog_nav_admin" class="listitem" rel="nofollow" href="https://i.cnblogs.com/">管理</a>
+</div>
+
+            </td>
+            <td align="right" style="padding-right: 20px" width="30%">
+                <div id="blog_stats">
+随笔：174
+文章：0
+评论：3
+引用：0</div>
+            </td>
+        </tr>
+    
+</tbody></table>
+<table align="center" width="90%" cellspacing="0" cellpadding="0" border="0">
+    <tbody><tr>
+        <td valign="top" width="75%">
+            <table align="center" width="100%" height="100%" cellspacing="0" cellpadding="5" border="0" bgcolor="white" class="index">
+                <tbody><tr>
+                    <td class="banner" valign="top" id="main">
+                        
+<div id="post_detail">
+<div class="block">
+	<h1 class="block_title"><a id="cb_post_title_url" href="http://www.cnblogs.com/iliuyuet/p/5603618.html">java堆、栈、堆栈的区别</a></h1>
+	<div class="post">
+		<div class="postcontent">
+			<div id="cnblogs_post_body"><p>1.栈(stack)与堆(heap)都是Java用来在Ram中存放数据的地方。与C++不同，Java自动管理栈和堆，程序员不能直接地设置栈或堆。 <br>
+<br>
+　　2. 
+栈的优势是，存取速度比堆要快，仅次于直接位于CPU中的寄存器。但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。另外，栈数据可以共
+享，详见第3点。堆的优势是可以动态地分配内存大小，生存期也不必事先告诉编译器，Java的垃圾收集器会自动收走这些不再使用的数据。但缺点是，由于要
+在运行时动态分配内存，存取速度较慢。
+<br>
+<br>
+　　3. Java中的数据类型有两种。 <br>
+<br>
+　　一种是基本类型(primitive types), 共有8种，即int, short, long, byte, float, double,
+ boolean, char(注意，并没有string的基本类型)。这种类型的定义是通过诸如int a = 3; long b = 
+255L;的形式来定义的，称为自动变量。值得注意的是，自动变量存的是字面值，不是类的实例，即不是类的引用，这里并没有类的存在。如int a = 
+3; 
+这里的a是一个指向int类型的引用，指向3这个字面值。这些字面值的数据，由于大小可知，生存期可知(这些字面值固定定义在某个程序块里面，程序块退出
+后，字段值就消失了)，出于追求速度的原因，就存在于栈中。
+<br>
+<br>
+　　另外，栈有一个很重要的特殊性，就是存在栈中的数据可以共享。假设我们同时定义： <br>
+<br>
+int a = 3; <br>
+int b = 3; <br>
+<br>
+　　编译器先处理int a = 
+3；首先它会在栈中创建一个变量为a的引用，然后查找有没有字面值为3的地址，没找到，就开辟一个存放3这个字面值的地址，然后将a指向3的地址。接着处
+理int b = 3；在创建完b的引用变量后，由于在栈中已经有3这个字面值，便将b直接指向3的地址。这样，就出现了a与b同时均指向3的情况。
+<br>
+<br>
+　　特别注意的是，这种字面值的引用与类对象的引用不同。假定两个类对象的引用同时指向一个对象，如果一个对象引用变量修改了这个对象的内部状态，那么另
+一个对象引用变量也即刻反映出这个变化。相反，通过字面值的引用来修改其值，不会导致另一个指向此字面值的引用的值也跟着改变的情况。如上例，我们定义完
+a与b的值后，再令a=4；那么，b不会等于4，还是等于3。在编译器内部，遇到a=4；时，它就会重新搜索栈中是否有4的字面值，如果没有，重新开辟地
+址存放4的值；如果已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。
+<br>
+<br>
+　　另一种是包装类数据，如Integer, String, 
+Double等将相应的基本数据类型包装起来的类。这些类数据全部存在于堆中，Java用new()语句来显示地告诉编译器，在运行时才根据需要动态创
+建，因此比较灵活，但缺点是要占用更多的时间。 4. String是一个特殊的包装类数据。即可以用String str = new 
+String("abc");的形式来创建，也可以用String str = "abc"；的形式来创建(作为对比，在JDK 
+5.0之前，你从未见过Integer i = 3;的表达式，因为类与字面值是不能通用的，除了String。而在JDK
+ 5.0中，这种表达式是可以的！因为编译器在后台进行Integer i = new 
+Integer(3)的转换)。前者是规范的类的创建过程，即在Java中，一切都是对象，而对象是类的实例，全部通过new()的形式来创建。Java
+中的有些类，如DateFormat类，可以通过该类的getInstance()方法来返回一个新创建的类，似乎违反了此原则。其实不然。该类运用了单
+例模式来返回类的实例，只不过这个实例是在该类内部通过new()来创建的，而getInstance()向外部隐藏了此细节。那为什么在String
+ str = "abc"；中，并没有通过new()来创建实例，是不是违反了上述原则？其实没有。 <br>
+<br>
+　　5. 关于String str = "abc"的内部工作。Java内部将此语句转化为以下几个步骤： <br>
+<br>
+　　(1)先定义一个名为str的对String类的对象引用变量：String str； <br>
+<br>
+　　(2)在栈中查找有没有存放值为"abc"的地址，如果没有，则开辟一个存放字面值为"abc"的地址，接着创建一个新的String类的对象o，并
+将o的字符串值指向这个地址，而且在栈中这个地址旁边记下这个引用的对象o。如果已经有了值为"abc"的地址，则查找对象o，并返回o的地址。
+<br>
+<br>
+　　(3)将str指向对象o的地址。 <br>
+<br>
+　　值得注意的是，一般String类中字符串值都是直接存值的。但像String str = "abc"；这种场合下，其字符串值却是保存了一个指向存在栈中数据的引用！
+<br>
+<br>
+　　为了更好地说明这个问题，我们可以通过以下的几个代码进行验证。 <br>
+<br>
+String str1 = "abc"; <br>
+String str2 = "abc"; <br>
+System.out.println(str1==str2); //true <br>
+<br>
+　　注意，我们这里并不用str1.equals(str2)；的方式，因为这将比较两个字符串的值是否相等。==号，根据JDK的说明，只有在两个引用都指向了同一个对象时才返回真值。而我们在这里要看的是，str1与str2是否都指向了同一个对象。
+<br>
+结果说明，JVM创建了两个引用str1和str2，但只创建了一个对象，而且两个引用都指向了这个对象。 <br>
+<br>
+　　我们再来更进一步，将以上代码改成： <br>
+<br>
+String str1 = "abc"; <br>
+String str2 = "abc"; <br>
+str1 = "bcd"; <br>
+System.out.println(str1 + "," + str2); //bcd, abc <br>
+System.out.println(str1==str2); //false <br>
+<br>
+　　这就是说，赋值的变化导致了类对象引用的变化，str1指向了另外一个新对象！而str2仍旧指向原来的对象。上例中，当我们将str1的值改为"bcd"时，JVM发现在栈中没有存放该值的地址，便开辟了这个地址，并创建了一个新的对象，其字符串的值指向这个地址。
+<br>
+<br>
+　　事实上，String类被设计成为不可改变(immutable)的类。如果你要改变其值，可以，但JVM在运行时根据新值悄悄创建了一个新对象，然
+后将这个对象的地址返回给原来类的引用。这个创建过程虽说是完全自动进行的，但它毕竟占用了更多的时间。在对时间要求比较敏感的环境中，会带有一定的不良
+影响。
+<br>
+<br>
+　　再修改原来代码： <br>
+<br>
+String str1 = "abc"; <br>
+String str2 = "abc"; <br>
+<br>
+str1 = "bcd"; <br>
+<br>
+String str3 = str1; <br>
+System.out.println(str3); //bcd <br>
+<br>
+String str4 = "bcd"; <br>
+System.out.println(str1 == str4); //true <br>
+<br>
+　　str3这个对象的引用直接指向str1所指向的对象(注意，str3并没有创建新对象)。当str1改完其值后，再创建一个String的引用
+str4，并指向因str1修改值而创建的新的对象。可以发现，这回str4也没有创建新的对象，从而再次实现栈中数据的共享。
+<br>
+<br>
+　　我们再接着看以下的代码。 <br>
+<br>
+String str1 = new String("abc"); <br>
+String str2 = "abc"; <br>
+System.out.println(str1==str2); //false <br>
+<br>
+　　创建了两个引用。创建了两个对象。两个引用分别指向不同的两个对象。 <br>
+<br>
+String str1 = "abc"; <br>
+String str2 = new String("abc"); <br>
+System.out.println(str1==str2); //false <br>
+<br>
+　　创建了两个引用。创建了两个对象。两个引用分别指向不同的两个对象。 <br>
+<br>
+　　以上两段代码说明，只要是用new()来新建对象的，都会在堆中创建，而且其字符串是单独存值的，即使与栈中的数据相同，也不会与栈中的数据共享。 <br>
+<br>
+　　6. 数据类型包装类的值不可修改。不仅仅是String类的值不可修改，所有的数据类型包装类都不能更改其内部的值。 <br>
+<br>
+&nbsp;&nbsp;&nbsp; 7. 结论与建议： <br>
+<br>
+　　(1)我们在使用诸如String str = 
+"abc"；的格式定义类时，总是想当然地认为，我们创建了String类的对象str。担心陷阱！对象可能并没有被创建！唯一可以肯定的是，指向
+String类的引用被创建了。至于这个引用到底是否指向了一个新的对象，必须根据上下文来考虑，除非你通过new()方法来显要地创建一个新的对象。因
+此，更为准确的说法是，我们创建了一个指向String类的对象的引用变量str，这个对象引用变量指向了某个值为"abc"的String类。清醒地认
+识到这一点对排除程序中难以发现的bug是很有帮助的。
+<br>
+<br>
+　　(2)使用String str = 
+"abc"；的方式，可以在一定程度上提高程序的运行速度，因为JVM会自动根据栈中数据的实际情况来决定是否有必要创建新对象。而对于String 
+str = new 
+String("abc")；的代码，则一概在堆中创建新对象，而不管其字符串值是否相等，是否有必要创建新对象，从而加重了程序的负担。这个思想应该是
+享元模式的思想，但JDK的内部在这里实现是否应用了这个模式，不得而知。
+<br>
+<br>
+　　(3)当比较包装类里面的数值是否相等时，用equals()方法；当测试两个包装类的引用是否指向同一个对象时，用==。 <br>
+<br>
+　　(4)由于String类的immutable性质，当String变量需要经常变换其值时，应该考虑使用StringBuffer类，以提高程序效率。 <br>
+<br>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+<br>
+<br>
+栈(stack):是一个先进后出的数据结构,通常用于保存方法(函数)中的参数,局部变量. <br>
+在java中,所有基本类型和引用类型都在栈中存储.栈中数据的生存空间一般在当前scopes内(就是由{...}括起来的区域). <br>
+<br>
+堆(heap):是一个可动态申请的内存空间(其记录空闲内存空间的链表由操作系统维护),C中的malloc语句所产生的内存空间就在堆中. <br>
+在java中,所有使用new xxx()构造出来的对象都在堆中存储,当垃圾回收器检测到某对象未被引用,则自动销毁该对象.所以,理论上说java中对象的生存空间是没有限制的,只要有引用类型指向它,则它就可以在任意地方被使用.
+<br>
+<br>
+在JAVA中，有六个不同的地方可以存储数据： <br>
+1. 寄存器（register）。这是最快的存储区，因为它位于不同于其他存储区的地方——处理器内部。但是寄存器的数量极其有限，所以寄存器由编译器根据需求进行分配。你不能直接控制，也不能在程序中感觉到寄存器存在的任何迹象。
+<br>
+2. 
+堆栈（stack）。位于通用RAM中，但通过它的“堆栈指针”可以从处理器哪里获得支持。堆栈指针若向下移动，则分配新的内存；若向上移动，则释放那些
+内存。这是一种快速有效的分配存储方法，仅次于寄存器。创建程序时候，JAVA编译器必须知道存储在堆栈内所有数据的确切大小和生命周期，因为它必须生成
+相应的代码，以便上下移动堆栈指针。这一约束限制了程序的灵活性，所以虽然某些JAVA数据存储在堆栈中——特别是对象引用，但是JAVA对象不存储其
+中。
+<br>
+3. 
+堆（heap）。一种通用性的内存池（也存在于RAM中），用于存放所以的JAVA对象。堆不同于堆栈的好处是：编译器不需要知道要从堆里分配多少存储区
+域，也不必知道存储的数据在堆里存活多长时间。因此，在堆里分配存储有很大的灵活性。当你需要创建一个对象的时候，只需要new写一行简单的代码，当执行
+这行代码时，会自动在堆里进行存储分配。当然，为这种灵活性必须要付出相应的代码。用堆进行存储分配比用堆栈进行存储存储需要更多的时间。
+<br>
+4. 静态存储（static storage）。这里的“静态”是指“在固定的位置”。静态存储里存放程序运行时一直存在的数据。你可用关键字static来标识一个对象的特定元素是静态的，但JAVA对象本身从来不会存放在静态存储空间里。
+<br>
+5. 常量存储（constant storage）。常量值通常直接存放在程序代码内部，这样做是安全的，因为它们永远不会被改变。有时，在嵌入式系统中，常量本身会和其他部分分割离开，所以在这种情况下，可以选择将其放在ROM中
+<br>
+6. 非RAM存储。如果数据完全存活于程序之外，那么它可以不受程序的任何控制，在程序没有运行时也可以存在。 <br>
+就速度来说，有如下关系： <br>
+寄存器 &lt; 堆栈 &lt; 堆 &lt; 其他 <br>
+<br>
+『上面这段话摘取之《Thinking in Java》』 <br>
+<br>
+在这里，主要要说下堆与堆栈的关系： <br>
+<br>
+堆：堆是heap，是所谓的动态内存，其中的内存在不需要时可以回收，以分配给新的内存请求，其内存中的数据是无序的，即先分配的和随后分配的内存并没有什么必然的位置关系，释放时也可以没有先后顺序。一般由使用者自由分配，malloc分配的就是堆，需要手动释放。
+<br>
+<br>
+<span style="color: #ff0000;">堆栈:就是STACK。实际上是只</span>有一个出入口的队列，即后进先出（First In Last Out），先分配的内存必定后释放。一般由，由系统自动分配，存放存放函数的参数值，局部变量等，自动清除。
+<br>
+<br>
+还有，堆是全局的，堆栈是每个函数进入的时候分一小块，函数返回的时候就释放了，静态和全局变量，new 得到的变量，都放在堆中，局部变量放在堆栈中，所以函数返回，局部变量就全没了。
+<br>
+<br>
+其实在实际应用中，堆栈多用来存储方法的调用。而对则用于对象的存储。 <br>
+<br>
+JAVA中的基本类型，其实需要特殊对待。因为，在JAVA中，通过new创建的对象存储在“堆”中，所以用new 
+创建一个小的、简单的变量，如基本类型等，往往不是很有效。因此，在JAVA中，对于这些类型，采用了与C、C++相同的方法。也就是说，不用new 
+来创建，而是创建一个并非是“引用”的“自动”变量。这个变量拥有它的“值”，并置于堆栈中，因此更高效。
+<br>
+因为基础差，所以面对的问题都很低级 <br>
+<br>
+问题的引入： <br>
+<br>
+问题一： <br>
+<br>
+String str1 = "abc"; <br>
+String str2 = "abc"; <br>
+System.out.println(str1==str2); //true <br>
+<br>
+问题二： <br>
+<br>
+String str1 =new String ("abc"); <br>
+String str2 =new String ("abc"); <br>
+System.out.println(str1==str2); // false <br>
+<br>
+问题三： <br>
+<br>
+String s1 = "ja"; <br>
+String s2 = "va"; <br>
+String s3 = "java"; <br>
+String s4 = s1 + s2; <br>
+System.out.println(s3 == s4);//false <br>
+System.out.println(s3.equals(s4));//true <br>
+<br>
+由于以上问题让我含糊不清，于是特地搜集了一些有关java内存分配的资料,以下是网摘： <br>
+<br>
+Java 中的堆和栈 <br>
+Java把内存划分成两种：一种是栈内存，一种是堆内存。 <br>
+<br>
+在函数中定义的一些基本类型的变量和对象的引用变量都在函数的栈内存中分配。 <br>
+<br>
+&nbsp;&nbsp; 当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量所分配的内存空间，该内存空间可以立即被另作他用。
+<br>
+<br>
+&nbsp;&nbsp; 堆内存用来存放由new创建的对象和数组。 <br>
+<br>
+&nbsp;&nbsp; 在堆中分配的内存，由Java虚拟机的自动垃圾回收器来管理。 <br>
+<br>
+&nbsp;&nbsp; 在堆中产生了一个数组或对象后，还可以在栈中定义一个特殊的变量，让栈中这个变量的取值等于数组或对象在堆内存中的首地址，栈中的这个变量就成了数组或对象的引用变量。
+<br>
+<br>
+&nbsp;&nbsp; 引用变量就相当于是为数组或对象起的一个名称，以后就可以在程序中使用栈中的引用变量来访问堆中的数组或对象。 <br>
+<br>
+具体的说： <br>
+栈与堆都是Java用来在Ram中存放数据的地方。与C++不同，Java自动管理栈和堆，程序员不能直接地设置栈或堆。 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Java的堆是一个运行时数据区,类的(对象从中分配空间。这些对象通过new、newarray、anewarray和multianewarray等
+指令建立，它们不需要程序代码来显式的释放。堆是由垃圾回收来负责的，堆的优势是可以动态地分配内存大小，生存期也不必事先告诉编译器，因为它是在运行时
+动态分配内存的，Java的垃圾收集器会自动收走这些不再使用的数据。但缺点是，由于要在运行时动态分配内存，存取速度较慢。
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+栈的优势是，存取速度比堆要快，仅次于寄存器，栈数据可以共享。但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。栈中主要存放一些基本类
+型的变量（,int, short, long, byte, float, double, boolean, char）和对象句柄。
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 栈有一个很重要的特殊性，就是存在栈中的数据可以共享。假设我们同时定义： <br>
+int a = 3; <br>
+int b = 3； <br>
+编译器先处理int a = 
+3；首先它会在栈中创建一个变量为a的引用，然后查找栈中是否有3这个值，如果没找到，就将3存放进来，然后将a指向3。接着处理int b = 
+3；在创建完b的引用变量后，因为在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同时均指向3的情况。这时，如果再令a=4；那么编译器
+会重新搜索栈中是否有4值，如果没有，则将4存放进来，并令a指向4；如果已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。要注意这
+种数据的共享与两个对象的引用同时指向一个对象的这种共享是不同的，因为这种情况a的修改并不会影响到b,
+ 它是由编译器完成的，它有利于节省空间。而一个对象引用变量修改了这个对象的内部状态，会影响到另一个对象引用变量。 <br>
+<br>
+String是一个特殊的包装类数据。可以用： <br>
+String str = new String("abc"); <br>
+String str = "abc"; <br>
+两种的形式来创建，第一种是用new()来新建对象的，它会在存放于堆中。每调用一次就会创建一个新的对象。 <br>
+而第二种是先在栈中创建一个对String类的对象引用变量str，然后查找栈中有没有存放"abc"，如果没有，则将"abc"存放进栈，并令str指向”abc”，如果已经有”abc” 则直接令str指向“abc”。
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 比较类里面的数值是否相等时，用equals()方法；当测试两个包装类的引用是否指向同一个对象时，用==，下面用例子说明上面的理论。 <br>
+String str1 = "abc"; <br>
+String str2 = "abc"; <br>
+System.out.println(str1==str2); //true <br>
+可以看出str1和str2是指向同一个对象的。 <br>
+<br>
+String str1 =new String ("abc"); <br>
+String str2 =new String ("abc"); <br>
+System.out.println(str1==str2); // false <br>
+用new的方式是生成不同的对象。每一次生成一个。 <br>
+&nbsp;&nbsp; 因此用第二种方式创建多个”abc”字符串,在内存中其实只存在一个对象而已. 这种写法有利与节省内存空间. 
+同时它可以在一定程度上提高程序的运行速度，因为JVM会自动根据栈中数据的实际情况来决定是否有必要创建新对象。而对于String str = 
+new String("abc")；的代码，则一概在堆中创建新对象，而不管其字符串值是否相等，是否有必要创建新对象，从而加重了程序的负担。
+<br>
+&nbsp;&nbsp; 另一方面, 要注意: 我们在使用诸如String str = 
+"abc"；的格式定义类时，总是想当然地认为，创建了String类的对象str。担心陷阱！对象可能并没有被创建！而可能只是指向一个先前已经创建的
+对象。只有通过new()方法才能保证每次都创建一个新的对象。由于String类的immutable性质，当String变量需要经常变换其值时，应
+该考虑使用StringBuffer类，以提高程序效率。&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/iliuyuet/category/663355.html" target="_blank">JVM</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5603618,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;ed404730-6d0a-e311-8d02-90b11c0b17d6&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/iliuyuet/" target="_blank"><img src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/iliuyuet/">liuyueyue</a><br>
+            <a href="http://home.cnblogs.com/u/iliuyuet/followees">关注 - 1</a><br>
+            <a href="http://home.cnblogs.com/u/iliuyuet/followers">粉丝 - 5</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;ed404730-6d0a-e311-8d02-90b11c0b17d6&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5603618,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(5603618,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/iliuyuet/p/5595275.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/iliuyuet/p/5595275.html" title="发布于2016-06-17 22:16">mysql 日期类型比较</a><br><a href="http://www.cnblogs.com/iliuyuet/p/5644956.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/iliuyuet/p/5644956.html" title="发布于2016-07-05 20:35">java常量池存放在哪里</a><br></div>
+</div>
+
+
+		</div>
+		<div class="itemdesc">
+			发表于 <span id="post-date">2016-06-21 14:48</span> <a href="http://www.cnblogs.com/iliuyuet/">liuyueyue</a> 阅读(<span id="post_view_count">10696</span>) 评论(<span id="post_comment_count">2</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5603618" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#" onclick="AddToWz(5603618);return false;">收藏</a>
+		</div>
+	</div>
+	<div class="seperator">&nbsp;</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=161151,cb_entryId=5603618,cb_blogApp=currentBlogApp,cb_blogUserGuid='ed404730-6d0a-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2016/6/21 14:48:00';loadViewCount(cb_entryId);</script>
+	
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<div class="post">
+<a name="评论"></a>
+<div class="moreinfo">
+	<div class="moreinfotitle">
+		评论
+	</div>
+	
+	
+			<div class="comments">
+		
+			<div class="comment">
+				<div class="comment_title">
+					<a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#3717349" class="layer">#1楼</a><a name="3717349" id="comment_anchor_3717349"></a>
+				</div>
+				<div class="comment_content"><div id="comment_body_3717349" class="blog_comment_body">写的挺用心<br>String s1 = "ja"; <br>String s2 = "va"; <br>String s3 = "java"; <br>String s4 = s1 + s2; <br>System.out.println(s3 == s4);//false <br>System.out.println(s3.equals(s4));//true <br><br>打印false的原因是，java 重载了“+”，查看java字节码可以发现“+”其实是调用了StringBuilder 所以使用了“+”其实是生成了一个新的对象。所以(s3 == s4)打印false</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3717349,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3717349,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+				<div class="comment_footer"><a id="a_comment_author_3717349" href="http://home.cnblogs.com/u/362613/" target="_blank">shijiao0471</a> <a href="http://msg.cnblogs.com/send/shijiao0471" title="发送站内短消息" class="sendMsg2This">&nbsp;</a> 评论于  <span class="comment_date">2017-06-19 11:44</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment_actions"></span></div>
+			</div>
+		
+			<div class="comment">
+				<div class="comment_title">
+					<a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#3726068" class="layer">#2楼</a><a name="3726068" id="comment_anchor_3726068"></a><span id="comment-maxId" style="display:none;">3726068</span><span id="comment-maxDate" style="display:none;">2017/6/30 15:26:21</span>
+				</div>
+				<div class="comment_content"><div id="comment_body_3726068" class="blog_comment_body"><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#3717349" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3717349);">@</a>
+shijiao0471   为什么我认为false的原因是因为他们指向的对象不同，s3指向的是java，而s4指向的是ja ，va，但是他们的值一样，所以==是false， equals是true</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3726068,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3726068,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+				<div class="comment_footer"><a id="a_comment_author_3726068" href="http://home.cnblogs.com/u/1191753/" target="_blank">houtian17</a> <a href="http://msg.cnblogs.com/send/houtian17" title="发送站内短消息" class="sendMsg2This">&nbsp;</a> 评论于  <span class="comment_date">2017-06-30 15:26</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment_actions"></span></div>
+			</div>
+		
+			</div>
+		
+</div>
+</div>
+<div class="seperator">&nbsp;</div>
+<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://group.cnblogs.com/topic/77995.html" target="_blank">【活动】阿里云双11活动开始预热 云服务器限时2折起</a><br><a href="http://click.aliyun.com/m/33696/" target="_blank">【调查】有奖调研即刻参与，你竟然是酱紫程序猿！</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="http://www.gcpowertools.com.cn/products/spreadjs/?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=SpreadJS&amp;utm_campaign=community" target="_blank"><img width="300" height="250" src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/24442-20171031213013029-1265843211.jpg" alt="葡萄城1101"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/581541/" target="_blank">你的朋友圈被京东家电红砸晕了吗？</a><br> ·  <a href="http://news.cnblogs.com/n/581539/" target="_blank">英特尔宣布为2018年韩国冬奥会提供5G网络支持</a><br> ·  <a href="http://news.cnblogs.com/n/581537/" target="_blank">优信集团上线“优信新车一成购”，打通汽车全生命周期产业链</a><br> ·  <a href="http://news.cnblogs.com/n/581536/" target="_blank">“抖音”内测直播功能，短视频VS直播，一场和谐的抢地盘游戏</a><br> ·  <a href="http://news.cnblogs.com/n/581533/" target="_blank">战斗民族如何战胜谷歌，在人工智能领域取得一席之地？</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/32986/" target="_blank"><img width="468" height="60" src="./java堆、栈、堆栈的区别 - liuyueyue - 博客园_files/24442-20171027070203758-1397753435.jpg" alt="阿里云双11"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/578502/" target="_blank">为什么你参加了那么多培训，却依然表现平平？</a><br> ·  <a href="http://kb.cnblogs.com/page/579832/" target="_blank">写给初学前端工程师的一封信</a><br> ·  <a href="http://kb.cnblogs.com/page/579480/" target="_blank">实用VPC虚拟私有云设计原则</a><br> ·  <a href="http://kb.cnblogs.com/page/576251/" target="_blank">如何阅读计算机科学类的书</a><br> ·  <a href="http://kb.cnblogs.com/page/578103/" target="_blank">Google 及其云智慧</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+                    </div></td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td valign="top" id="sidebar">
+            <table align="center" width="100%" height="1400" cellspacing="0" cellpadding="5" border="0" bgcolor="white">
+                <tbody><tr>
+                    <td class="banner" valign="top" style="padding-top: 0px">
+                        
+                            <table width="100%" height="200">
+                                <tbody><tr>
+                                    <td>
+                                        <div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="日历">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/10/01&#39;);return false;">&lt;</a></td><td align="center">2017年11月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/12/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td class="CalTodayDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td class="CalWeekendDay" align="center">4</td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td class="CalWeekendDay" align="center">11</td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td class="CalWeekendDay" align="center">18</td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalWeekendDay" align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td></tr><tr><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                            
+<h1>公告</h1>
+<div align="center" style="margin-top:10px"><div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/iliuyuet/">liuyueyue</a><br>园龄：<a href="http://home.cnblogs.com/u/iliuyuet/" title="入园时间：2013-08-21">4年2个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/iliuyuet/followers/">5</a><br>关注：<a href="http://home.cnblogs.com/u/iliuyuet/followees/">1</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;ed404730-6d0a-e311-8d02-90b11c0b17d6&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script></div>
+                            <div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/iliuyuet/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/iliuyuet/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/iliuyuet/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/iliuyuet/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/iliuyuet/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+
+</div></div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+		<h1 class="listtitle">随笔分类</h1>
+		
+				<ul class="list" type="square">
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_0" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/825325.html">activeMQ(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_1" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/694752.html">Bayeux(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_2" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/694284.html">Comet(3)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_3" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/648102.html">Core Java(36)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_4" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/704934.html">DataSource(3)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_5" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/839935.html">dubbo</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_6" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/840165.html">Ehcache(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_7" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/687053.html">Hibernate(2)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_8" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/715650.html">Html(3)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_9" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/696827.html">Html5(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_10" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/716887.html">IDE(6)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_11" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/673975.html">JavaScript(9)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_12" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/681367.html">JFreeChart(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_13" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/658605.html">jQuery(11)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_14" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/648753.html">Jsf(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_15" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/663355.html">JVM(9)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_16" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/631487.html">Linux(4)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_17" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/715105.html">Maven(2)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_18" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/690459.html">Mybatis(2)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_19" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/817382.html">mysql(12)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_20" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/840430.html">nosql(4)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_21" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/604254.html">Oracle(22)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_22" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/668670.html">others(8)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_23" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/654205.html">Security(9)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_24" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/673995.html">Spring(4)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_25" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/583576.html">spring MVC</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_26" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/657118.html">Struts(3)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_27" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/648875.html">Tomcat(3)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_28" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/667817.html">WebService(4)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_29" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/669779.html">XML(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_30" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/837760.html">zookeeper(2)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_31" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/808433.html">搜索引擎(1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_0_Link_32" class="listitem" href="http://www.cnblogs.com/iliuyuet/category/733263.html">重拾系列(4)</a> </li>
+			
+				</ul>
+			
+	
+		<h1 class="listtitle">随笔档案</h1>
+		
+				<ul class="list" type="square">
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_0" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2017/06.html">2017年6月 (1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_1" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2016/10.html">2016年10月 (1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_2" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2016/07.html">2016年7月 (10)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_3" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2016/06.html">2016年6月 (10)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_4" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2016/05.html">2016年5月 (7)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_5" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2016/04.html">2016年4月 (7)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_6" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2016/03.html">2016年3月 (1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_7" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/09.html">2015年9月 (6)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_8" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/08.html">2015年8月 (4)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_9" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/07.html">2015年7月 (17)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_10" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/06.html">2015年6月 (13)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_11" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/05.html">2015年5月 (32)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_12" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/04.html">2015年4月 (26)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_13" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/03.html">2015年3月 (14)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_14" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/02.html">2015年2月 (4)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_15" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2015/01.html">2015年1月 (14)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_16" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2014/11.html">2014年11月 (3)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_17" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2014/09.html">2014年9月 (1)</a> </li>
+			
+				<li class="listitem"><a id="CatList_LinkList_1_Link_18" class="listitem" href="http://www.cnblogs.com/iliuyuet/archive/2014/08.html">2014年8月 (3)</a> </li>
+			
+				</ul>
+			
+	
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/iliuyuet/p/5404877.html#3728132">1. Re:mysql 与 oracle 比较（一）group by 容易产生的误解</a></li>
+        <li class="recent_comment_body">按照<br>    kindergartenCode,<br>    gradeCode<br>分组 不就是一条结果吗<br>所以你的分析有错 mysql这样也是对的</li>
+        <li class="recent_comment_author">--刘罗好帅的爸爸</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#3726068">2. Re:java堆、栈、堆栈的区别</a></li>
+        <li class="recent_comment_body">@shijiao0471 为什么我认为false的原因是因为他们指向的对象不同，s3指向的是java，而s4指向的是ja ，va，但是他们的值一样，所以==是false， equals是true...</li>
+        <li class="recent_comment_author">--houtian17</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html#3717349">3. Re:java堆、栈、堆栈的区别</a></li>
+        <li class="recent_comment_body">写的挺用心String s1 = "ja"; String s2 = "va"; String s3 = "java"; String s4 = s1 + s2; System.out.println......</li>
+        <li class="recent_comment_author">--shijiao0471</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/iliuyuet/p/4503799.html">1. mybatis之sql执行有数据但返回结果为null(11919)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html">2. java堆、栈、堆栈的区别(10693)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5595275.html">3. mysql 日期类型比较(10360)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/4315969.html">4. Java内存不足之PermGen space错误探究(9104)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5645866.html">5. 几种常用的数据库连接池(7743)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html">1. java堆、栈、堆栈的区别(2)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5404877.html">2. mysql 与 oracle 比较（一）group by 容易产生的误解(1)</a></li></ul></div>
+</div></div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/iliuyuet/p/4315969.html">1. Java内存不足之PermGen space错误探究(2)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5650146.html">2. Spring事务配置的五种方式（转载）(1)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5645866.html">3. 几种常用的数据库连接池(1)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5645020.html">4. final修饰的变量是引用不能改变，还是引用的对象不能改变？？？(1)</a></li><li><a href="http://www.cnblogs.com/iliuyuet/p/5603618.html">5. java堆、栈、堆栈的区别(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+                        
+                        <br>
+                        
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com/">博客园</a><br>模板提供：<a href="http://blog.hjenglish.com/">沪江博客</a><br>
+	Copyright ©2017 liuyueyue
+</div>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+<br>
+
+
+
+
+</body></html>
