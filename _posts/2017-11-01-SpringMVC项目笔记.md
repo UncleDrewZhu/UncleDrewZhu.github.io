@@ -234,3 +234,43 @@ Java 中参数传递情况如下：
 
 - 一个方法不能实现让对象参数引用一个新对象
 
+```
+    public static void main(String[] args) {
+        Employee employee1 = new Employee();
+        employee1.age = 100;
+        changeEmployee1(employee1);
+        System.out.println(employee1.age);//100
+
+        Employee employee2 = new Employee();
+        employee2.age = 100;
+        changeEmployee2(employee2);
+        System.out.println(employee2.age);//1000
+
+        String x1 = new String("ab");
+        change1(x1);
+        System.out.println(x1);//ab
+
+        String x2 = new String("ab");
+        change2(x2);
+        System.out.println(x2);//ab
+    }
+
+    private static void changeEmployee1(Employee employee) {
+        employee = new Employee();
+        employee.age = 1000;
+    }
+
+    private static void changeEmployee2(Employee employee) {
+        employee.age = 1000;
+        employee = new Employee();
+        employee.age = 2000;
+    }
+
+    private static void change1(String x) {
+        x = "cd";
+    }
+
+    private static void change2(String x) {
+        x += "cd";
+    }
+```
