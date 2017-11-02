@@ -278,6 +278,7 @@ Java 中参数传递情况如下：
         employee.age = 2000;
     }
 
+    //传过去的参数实际拷贝了一份，刚开始一同指向"ab"，后来指向“cd”就跟原来x的没什么关系了。
     private static void change1(String x) {
         x = "cd";
     }
