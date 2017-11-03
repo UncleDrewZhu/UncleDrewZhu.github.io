@@ -456,4 +456,7 @@ $ mvn deploy:deploy-file -DgroupId=com.lfzhu -DartifactId=common-module -Dversio
 
 - 例如模块A运行所有单元测试，模块B要跳过一些测试，这时就需要配置 maven-surefire-plugin来实现，那样两个模块的插件配置就不一致了。此时不能使用 pluginManagement。
 
+#### 参考
+[Maven实战（三）——多模块项目的POM重构](http://www.infoq.com/cn/news/2011/01/xxb-maven-3-pom-refactoring)
+
 # 使用 Maven 构建多模块(modules)项目
