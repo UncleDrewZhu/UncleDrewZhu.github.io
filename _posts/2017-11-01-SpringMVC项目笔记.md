@@ -195,6 +195,8 @@ public class SystemLoggingFilter implements Filter {
 
 # Java 内存机制
 
+#### 参考
+
 [Java 中堆和栈的区别](http://www.cnblogs.com/perfy/p/3820594.html)
 
 [Java 堆、栈、堆栈的区别](http://www.cnblogs.com/iliuyuet/p/5603618.html)
@@ -207,6 +209,7 @@ public class SystemLoggingFilter implements Filter {
 
 [Java 内存溢出 栈溢出的原因与排查方法](http://www.cnblogs.com/panxuejun/p/5882309.html)
 
+#### 总结
 
 - 栈(stack)：是一个先进后出的数据结构，通常用于保存方法(函数)中的参数，局部变量。
 在 Java 中，所有基本类型(int, short, long, byte, float, double, boolean, char)和引用类型都在栈中存储。
@@ -217,6 +220,8 @@ public class SystemLoggingFilter implements Filter {
 当垃圾回收器检测到某对象未被引用，则自动销毁该对象。所以，理论上说 Java 中对象的生存空间是没有限制的,只要有引用类型指向它，则它就可以在任意地方被使用。 
 
 # Java 里的所有参数都是“值”传递
+
+#### 引用
 
 > 其实Java里的所有参数都是“值”传递。之所以用引号括起来是因为值传递容易让人产生误解。
 八个基础类型是按照一般人理解的值传递的方式传递的，将变量对应的值复制一份传递给函数。
@@ -233,6 +238,8 @@ public class SystemLoggingFilter implements Filter {
 其实传引用副本的实质就是复制指向地址的指针，只不过Java不像C++中有显著的*和&符号。
 需要注意的是：String类型也是对象型变量，所以它必然是传引用副本。
 String类是final类型的，因此不可以继承和修改这个类。
+
+#### 简单的例子
 
 概念:
 - 值传递：表示方法接收的是调用者提供的值。
