@@ -287,3 +287,101 @@ Java 中参数传递情况如下：
         x += "cd";
     }
 ```
+
+# POM 重构
+#### dependencyManagement 维护依赖一致性
+假如我们的开发模式是模块化开发，模块化开发即互相独立，低耦合性质。
+如果每个模块都需要使用日志 log，可能每个模块的负责人引用的日志框架会不同。或者说假使使用了统一框架，但是版本不同。
+此时会引起一个问题：难维护！
+
+如何解决？
+
+我们借助 maven 的 dependencyManagement，可以方便的解决这一问题。
+
+1.将公共依赖抽出去，放在统一的一个 pom 文件中管理（注意，packaging 的值必须为 pom）
+
+```
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.lfzhu</groupId>
+<artifactId>father-module</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<packaging>pom</packaging>
+    
+<dependencyManagement>
+        <!--junit-->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--logback-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>4.8</version>
+        </dependency>
+
+    </dependencies>
+</dependencyManagement>
+
+```
+
+在这里，我们把日志框架，单元测试框架，分离出去，作为父 pom。
+
+***dependencyManagement 里面的配置不会给任何子模块引入依赖。***
+
+2.子模块引用父 pom 中的依赖
+
+```
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.lfzhu</groupId>
+<artifactId>son-module-one</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<packaging>jar</packaging>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.lfzhu</groupId>
+            <artifactId>father-module</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+    
+<dependencies>
+    <!--junit-->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+    </dependency>
+</dependencies>             
+```
+
+当子模块需要使用JUnit的时候，我们就可以如此简化依赖配置。
