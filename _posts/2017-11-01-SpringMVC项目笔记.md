@@ -379,7 +379,7 @@ $ mvn package
 $ mvn deploy:deploy-file -DgroupId=com.lfzhu -DartifactId=common-module -Dversion=0.0.1-SNAPSHOT -Dpackaging=pom -Dfile=./pom.xml -DpomFile=./pom.xml -Durl=http://host:port/repository/maven-snapshots -DrepositoryId=nexus
 ```
 
-2.子模块导入公共模块中的依赖
+2.新建项目`son-module-one`，子模块导入公共模块中的依赖
 
 ```
 <modelVersion>4.0.0</modelVersion>
@@ -439,7 +439,7 @@ $ mvn deploy:deploy-file -DgroupId=com.lfzhu -DartifactId=common-module -Dversio
 </build>
 ```
 
-2.子模块中添加配置
+2.新建项目`son-module-two`，子模块中添加配置
 
 ```
 <modelVersion>4.0.0</modelVersion>
@@ -459,7 +459,7 @@ $ mvn deploy:deploy-file -DgroupId=com.lfzhu -DartifactId=common-module -Dversio
 
 注意：
 
-- 简单的把插件配置提取到父 POM 的 pluginManagement 中往往不适合所有情况，只有那些普适的插件配置才应该使用 pluginManagement 提取到父 POM 中。
+- 简单的把插件配置提取到父 POM 的 pluginManagement 中往往不适合所有情况。
 
 - 例如模块A运行所有单元测试，模块B要跳过一些测试，这时就需要配置 maven-surefire-plugin来实现，那样两个模块的插件配置就不一致了。此时不能使用 pluginManagement。
 
