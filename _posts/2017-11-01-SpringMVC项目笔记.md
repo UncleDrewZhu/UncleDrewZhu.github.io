@@ -298,12 +298,25 @@ Java 中参数传递情况如下：
 
 我们借助 maven 的 dependencyManagement，可以方便的解决这一问题。
 
-1.将公共依赖抽出去，放在统一的一个 pom 文件中管理（注意，packaging 的值必须为 pom）
+两种实现方式：
+- 子模块***继承***公共模块：`extends` 继承只能1对1
+
+- 子模块***导入***公共模块：`import scope` 导入可以1对多
+
+> 我们知道Maven的继承和Java的继承一样，是无法实现多重继承的。
+如果10个、20个甚至更多模块继承自同一个模块，那么按照我们之前的做法，这个父模块的dependencyManagement会包含大量的依赖。
+如果你想把这些依赖分类以更清晰的管理，那就不可能了，import scope依赖能解决这个问题。
+你可以把dependencyManagement放到单独的专门用来管理依赖的POM中，然后在需要使用依赖的模块中通过import scope依赖，就可以引入dependencyManagement。
+
+#### 子模块通过导入公共模块实现依赖管理
+
+
+1.新建项目`common-module`，将公共依赖抽出去，统一管理（注意，packaging 的值必须为 pom）
 
 ```
 <modelVersion>4.0.0</modelVersion>
 <groupId>com.lfzhu</groupId>
-<artifactId>father-module</artifactId>
+<artifactId>common-module</artifactId>
 <version>0.0.1-SNAPSHOT</version>
 <packaging>pom</packaging>
     
@@ -344,17 +357,22 @@ Java 中参数传递情况如下：
             <artifactId>logstash-logback-encoder</artifactId>
             <version>4.8</version>
         </dependency>
-
     </dependencies>
 </dependencyManagement>
 
 ```
 
-在这里，我们把日志框架，单元测试框架，分离出去，作为父 pom。
+这里，我们把日志框架，单元测试框架放在公共的 POM 中统一维护。
 
-***dependencyManagement 里面的配置不会给任何子模块引入依赖。***
+注意：***dependencyManagement 里面的配置不会给任何子模块引入依赖。***
 
-2.子模块引用父 pom 中的依赖
+打包并上传至公共仓库 nexus 中
+```
+$ mvn package
+$ mvn deploy:deploy-file -DgroupId=com.lfzhu -DartifactId=common-module -Dversion=0.0.1-SNAPSHOT -Dpackaging=pom -Dfile=./pom.xml -DpomFile=./pom.xml -Durl=http://host:port/repository/maven-snapshots -DrepositoryId=nexus
+```
+
+2.子模块导入公共模块中的依赖
 
 ```
 <modelVersion>4.0.0</modelVersion>
@@ -365,9 +383,10 @@ Java 中参数传递情况如下：
 
 <dependencyManagement>
     <dependencies>
+         <!--可以导入多个项目-->
         <dependency>
             <groupId>com.lfzhu</groupId>
-            <artifactId>father-module</artifactId>
+            <artifactId>common-module</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
@@ -385,3 +404,56 @@ Java 中参数传递情况如下：
 ```
 
 当子模块需要使用JUnit的时候，我们就可以如此简化依赖配置。
+
+只需要 groupId 和 artifactId，其它元素如 version 和 scope 都能通过导入的公共模块中的 dependencyManagement 得到。
+
+
+#### 子模块通过继承公共模块实现插件(Plugin)管理
+消除多模块插件配置重复
+
+1.公共模块中添加配置
+
+```
+<build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
+```
+
+2.子模块中添加配置
+
+```
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.lfzhu</groupId>
+<artifactId>son-module-two</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<packaging>jar</packaging>
+
+<parent>
+    <groupId>com.lfzhu</groupId>
+    <artifactId>common-module</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</parent>
+```
+
+由于 Maven 内置了 maven-compiler-plugin 与生命周期的绑定，因此子模块就不再需要任何 maven-compiler-plugin 的配置了。
+
+注意：
+
+- 简单的把插件配置提取到父 POM 的 pluginManagement 中往往不适合所有情况，只有那些普适的插件配置才应该使用 pluginManagement 提取到父 POM 中。
+
+- 例如模块A运行所有单元测试，模块B要跳过一些测试，这时就需要配置 maven-surefire-plugin来实现，那样两个模块的插件配置就不一致了。此时不能使用 pluginManagement。
+
+# 使用 Maven 构建多模块(modules)项目
