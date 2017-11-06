@@ -467,3 +467,158 @@ $ mvn deploy:deploy-file -DgroupId=com.lfzhu -DartifactId=common-module -Dversio
 [Maven实战（三）——多模块项目的POM重构](http://www.infoq.com/cn/news/2011/01/xxb-maven-3-pom-refactoring)
 
 # 使用 Maven 构建多模块(modules)项目
+项目开发中，为了便于后期的维护，我们一般会进行分模块开发。各个模块之间的职责会比较明确，后期管理起来也相对比较容易。
+
+#### 创建一个整体管理的项目 `system-parent`
+创建完成之后，只保留POM文件
+
+```
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.lfzhu</groupId>
+<artifactId>system-parent</artifactId>
+<version>1.5-SNAPSHOT</version>
+<packaging>pom</packaging>
+<name>system-parent</name>
+<url>http://maven.apache.org</url>
+
+```
+
+使用 `dependencyManagement` 管理依赖
+
+```
+<dependencyManagement>
+    <dependencies>
+        <!--logback-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>4.8</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+#### 创建子模块A `system-module-a`
+在 `system-parent` 项目上右击 `New Module`，选择 `maven` ，在 `artifactId`里面输入`system-module-a`
+
+```
+<modelVersion>4.0.0</modelVersion>
+<artifactId>system-module-a</artifactId>
+<version>1.4-SNAPSHOT</version>
+<packaging>jar</packaging>
+<name>system-domain</name>
+<url>http://maven.apache.org</url>
+```
+
+此时，我们发现在POM文件里面多了 `parent` 标签
+```
+<parent>
+    <artifactId>system-parent</artifactId>
+    <groupId>com.lfzhu</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.5-SNAPSHOT</version>
+</parent>
+```
+
+快速引入依赖，使用父模块的依赖，无需输入版本号，自动使用父模块中该依赖的版本号
+```
+<dependencies>
+    <!--junit-->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+    </dependency>
+</dependencies>
+```
+
+#### 创建子模块B `system-module-b`
+在 `system-parent` 项目上右击 `New Module`，选择 `maven` ，在 `artifactId`里面输入`system-module-b`
+
+```
+<modelVersion>4.0.0</modelVersion>
+<artifactId>system-module-b</artifactId>
+<version>1.3-SNAPSHOT</version>
+<packaging>jar</packaging>
+<name>system-service</name>
+<url>http://maven.apache.org</url>
+
+<parent>
+    <artifactId>system-parent</artifactId>
+    <groupId>com.lfzhu</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.5-SNAPSHOT</version>
+</parent>
+```
+
+如果模块B需要使用到模块A中的类，需要添加对模块A的依赖
+```
+<dependencies>
+    <dependency>
+        <groupId>com.lfzhu</groupId>
+        <artifactId>system-module-a</artifactId>
+        <version>1.4-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+``` 
+
+#### 创建子模块C `system-module-c`
+在 `system-parent` 项目上右击 `New Module`，选择 `maven` ，在 `artifactId`里面输入`system-module-c`
+
+```
+<modelVersion>4.0.0</modelVersion>
+<artifactId>system-service</artifactId>
+<!--不指定 version，默认取 system-parent 的 version 1.5-SNAPSHOT-->
+<packaging>jar</packaging>
+<name>system-service</name>
+<url>http://maven.apache.org</url>
+
+<parent>
+    <artifactId>system-parent</artifactId>
+    <groupId>com.lfzhu</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.5-SNAPSHOT</version>
+</parent>
+```
+
+如果模块C需要使用到模块A和模块B中的类，只需要添加对模块B的依赖，自动会将模块A添加进来，因为模块B已经依赖了模块A
+```
+<dependencies>
+    <dependency>
+        <groupId>com.lfzhu</groupId>
+        <artifactId>system-module-b</artifactId>
+        <version>1.3-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+``` 
+
+#### 项目 `system-parent` 自动增加 `modules`标签
+```
+<modules>
+    <module>system-module-a</module>
+    <module>system-module-b</module>
+    <module>system-module-c</module>
+</modules>
+```
+
+#### 打包
+###### 子模块独立打包
+- 进入子模块的 `maven` 插件管理处，点击 `package` 
+
+- 会在当前子模块项目中的 `target` 文件夹下生成 `jar` 文件
+
+###### 父模块统一打包子模块
+- 进入父模块的 `maven` 插件管理处，点击 `package` 
+
+- 会在每个子模块项目中的 `target` 文件夹下生成各自对应的 `jar` 文件
+
+- 父模块项目中不会生成 `target` 文件夹
