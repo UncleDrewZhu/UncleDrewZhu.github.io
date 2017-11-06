@@ -622,3 +622,6 @@ $ mvn deploy:deploy-file -DgroupId=com.lfzhu -DartifactId=common-module -Dversio
 - 会在每个子模块项目中的 `target` 文件夹下生成各自对应的 `jar` 文件
 
 - 父模块项目中不会生成 `target` 文件夹
+
+#### 参考
+[Maven学习总结(八)——使用Maven构建多模块项目](http://www.cnblogs.com/xdp-gacl/p/4242221.html)
