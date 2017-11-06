@@ -7,8 +7,13 @@ author:     uncledrew
 header-img: img/post-bg-re-vs-ng2.jpg
 catalog: true
 tags:
-    - Spring
     - 性能测试
+    - 日志
+    - 过滤器
+    - 内存机制
+    - 值传递
+    - 依赖管理
+    - 多模块
 ---
 
 > 纸上得来终觉浅，绝知此事要躬行。
