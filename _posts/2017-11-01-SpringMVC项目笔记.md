@@ -18,7 +18,7 @@ tags:
 
 > 纸上得来终觉浅，绝知此事要躬行。
 >
-> [我的博客](http://uncledrewzhu.github.io/)
+> [我的博客](http://uncledrew.405go.cn/)
 
 # 使用 PerformanceMonitorInterceptor 进行服务层性能测试
 #### AOP 配置切入点

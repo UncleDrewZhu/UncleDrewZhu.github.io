@@ -15,7 +15,7 @@ tags:
 
 > 纸上得来终觉浅，绝知此事要躬行。
 >
-> [我的博客](http://uncledrewzhu.github.io/)
+> [我的博客](http://uncledrew.405go.cn/)
 
 # 前言
 现在主流的手机系统被 ios 和 android 两大巨头占领，所以本文主要是实现 ios 和 android 系统的消息推送。而在中国， android 系统的消息推送主要分为华为推送和小米的推送。

@@ -13,7 +13,7 @@ tags:
 
 > 纸上得来终觉浅，绝知此事要躬行。
 >
-> [我的博客](http://uncledrewzhu.github.io/)
+> [我的博客](http://uncledrew.405go.cn/)
 
 # 先看两个例子
 
