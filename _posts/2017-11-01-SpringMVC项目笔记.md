@@ -323,13 +323,22 @@ Java 提供了一种垃圾回收机制，在后台创建一个守护进程。该
 - Survivor A 区：Eden 区经历 GC 后仍然存活下来的对象。
 - Survivor B 区：Eden 区和Survivor A 区经历 GC 后仍然存活下来的对象。
 
+当某个 Survivor 区被填满，且仍有对象未被复制完毕时，或者某些对象在反复 Survive 15 次左右时，
+则把这部分剩余对象放到 Old 区。
+
+当 Old 区也被填满时，进行 Major GC，对 Old 区进行垃圾回收。
+
 
 ###### 老年代
 使用 ***标记整理*** 回收机制
 
+仅仅通过少量地移动对象就能清理垃圾，而且不存在内存碎片化。
+
 
 #### 参考
 [Java 技术之垃圾回收机制](http://www.importnew.com/26821.html)
+[JVM 的 工作原理，层次结构 以及 GC工作原理](https://segmentfault.com/a/1190000002579346#articleHeader6)
+[深入理解Java虚拟机笔记二（垃圾收集器与内存分配策略）](http://howiefh.github.io/2015/04/08/jvm-note-2/)
 
 
 
