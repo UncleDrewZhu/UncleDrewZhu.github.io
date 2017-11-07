@@ -12,6 +12,7 @@ tags:
     - 日志
     - 过滤器
     - 内存机制
+    - JVM
     - 垃圾回收
     - 值传递
 ---
@@ -245,6 +246,19 @@ public class SystemLoggingFilter implements Filter {
 ```
 
 如果这样配置，我们在 `SystemLoggingFilter` 类中是 ***不能*** 执行接口注入的操作(`@Autowired`)，因为它不是一个 Bean。
+
+# JVM(Java virtual machine)
+JVM 是运行 Java 程序必不可少的机制。JVM 实现了Java 的平台无关性。
+
+- 编译后的 Java 程序指令并不直接在硬件系统的 CPU 上执行，而是由 JVM 执行。
+- JVM 屏蔽了与具体平台相关的信息，使Java语言编译程序只需要生成在JVM上运行的目标字节码（.class）,就可以在多种平台上不加修改地运行。
+- JVM 在执行字节码时，把字节码解释成具体平台上的机器指令执行。因此实现java平台无关性。
+- JVM 是 Java 程序能在多平台间进行无缝移植的可靠保证，同时也是 Java 程序的安全检验引擎（还进行安全检查）。
+
+`JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area`
+
+classloader 把硬盘上的 class 文件加载到 JVM 中的运行时数据区域, 由执行引擎负责执行。
+
 
 
 # Java 内存机制
