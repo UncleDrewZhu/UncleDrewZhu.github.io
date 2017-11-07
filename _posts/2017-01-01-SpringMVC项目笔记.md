@@ -2,7 +2,7 @@
 layout:     post
 title:      SpringMVC 项目笔记(持续更新)
 subtitle:   针对平时做过的项目记一些笔记
-date:       2016-01-01
+date:       2017-01-01
 author:     uncledrew
 header-img: img/post-bg-re-vs-ng2.jpg
 catalog: true
