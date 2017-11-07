@@ -337,7 +337,9 @@ Java 提供了一种垃圾回收机制，在后台创建一个守护进程。该
 
 #### 参考
 [Java 技术之垃圾回收机制](http://www.importnew.com/26821.html)
+
 [JVM 的 工作原理，层次结构 以及 GC工作原理](https://segmentfault.com/a/1190000002579346#articleHeader6)
+
 [深入理解Java虚拟机笔记二（垃圾收集器与内存分配策略）](http://howiefh.github.io/2015/04/08/jvm-note-2/)
 
 
