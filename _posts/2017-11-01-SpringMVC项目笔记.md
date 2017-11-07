@@ -7,6 +7,7 @@ author:     uncledrew
 header-img: img/post-bg-re-vs-ng2.jpg
 catalog: true
 tags:
+    - Spring
     - 性能测试
     - 日志
     - 过滤器
@@ -20,6 +21,41 @@ tags:
 > 纸上得来终觉浅，绝知此事要躬行。
 >
 > [我的博客](http://uncledrew.405go.cn/)
+
+# Spring 是什么
+- Spring Framework(最新版本是5.x，项目上使用的是4.x)
+    - IoC(控制反转)
+    - DI(依赖注入)
+    - AOP(面向切面)
+    - MVC
+    - Test 
+- Spring Data
+- Spring Security
+- Spring Batch
+- Spring Boot
+
+
+#### Spring 核心思想(IoC, AOP)
+###### 前言
+一个系统的创建过程就从原先的new改为配置组装，内部通过注入解决了依赖关系，只要满足接口协议即插即用。
+
+###### 引用
+> Spring最核心的概念当属IoC, AOP。将对象创建过程的职责赋予容器，通过容器管理对象的生老病死， 
+将对象创建过程从编译时延期到运行时，即通过配置进行加载，这样一来就解决了不用编译后期选择具体实现，
+其实就是面向对象的核心理念，针对接口编程。
+IoC开始就是个factory加上依赖管理罢了，这样一来，一个系统的创建过程就从原先的new改为配置组装，
+内部通过注入解决了依赖关系，只要满足接口协议即插即用。
+通过IoC, AOP事实上形成了一个套路，通过这个套路完成了系统的整合。
+
+
+#### Spring 优势
+- 模块化开发，逻辑层，表现层，持久层独立分开。
+- 通过控制反转降低耦合性，一个对象的依赖通过被动注入的方式而非主动new。
+- 面向切面编程，代码不用散布在所有对象层次中，减少重复代码，提高代码复用率。
+  
+#### Spring AOP
+
+
 
 # 使用 PerformanceMonitorInterceptor 进行服务层性能测试
 #### AOP 配置切入点
