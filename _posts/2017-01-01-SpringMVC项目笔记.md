@@ -257,7 +257,7 @@ JVM 是运行 Java 程序必不可少的机制。JVM 实现了Java 的平台无�
 
 `JVM = 类加载器 classloader + 执行引擎 execution engine + 运行时数据区域 runtime data area`
 
-classloader 把硬盘上的 class 文件加载到 JVM 中的运行时数据区域, 由执行引擎负责执行。
+***类加载器把硬盘上的 class 文件加载到 JVM 中的运行时数据区域, 由执行引擎负责执行。***
 
 
 
