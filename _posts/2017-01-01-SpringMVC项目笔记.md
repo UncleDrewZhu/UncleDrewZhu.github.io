@@ -445,17 +445,70 @@ Java 中参数传递情况如下：
 # 数据结构
 #### HashMap
 ###### HashMap 的原理
+HashMap 是一个用于存储 Key-Value 键值对的集合，每一个键值对也叫做 Entry。这些键值对分散存储在一个数组当中，这个数组就是HashMap的主干。
+
+HashMap 数组每一个元素的初始值都是Null。
+
+######## Put 方法的原理
+以 `hashMap.put("key1", "value1")`为例：
+
+利用哈希函数来确定 Entry 的插入位置（index）： `index =  Hash（"key1"） = 5`
+
+当插入的 Entry 越来越多，Hash 函数会出现 index 冲突的情况。 `index =  Hash（"key2"） = 5`
+
+用 ***链表*** 解决index 冲突：
+HashMap 数组的每一个元素不止是一个 Entry 对象，也是一个链表的头节点。每一个 Entry 对象通过 Next 指针指向它的下一个 Entry 节点。
+当新来的 Entry 映射到冲突的数组位置时，使用 ***头插法***，将新来的 Entry 插入到对应的链表头，原来位置上的 Entry 在链表上的位置后移。
+
+如图：
+![](http://oxy6ml8al.bkt.clouddn.com/hashmap-put.png)
+
+头插法：后插入的 Entry 被查找的可能性更大。
+
+
+######## Get 方法的原理
+以 `hashMap.get("key1")`为例：
+
+利用哈希函数得到位置(index)： `index =  Hash（"key1"） = 5`
+
+由于同一个位置有可能匹配到多个 Entry，这时候就需要顺着对应链表的头节点，一个一个向下来查找。
 
 
 ###### HashMap 的初始化长度
+HashMap 默认的初始化长度是 16，并且每次自动扩展或手动初始化时，长度必须时 2 的幂。
 
+为了实现高效的 Hash 算法，HashMap 采用了位运算的方式。 `index =  HashCode(Key) & (hashMap.Length - 1)`
 
 
 ###### HashMap 在高并发下引起的死锁
+在 JDK1.7 环境下，使用HashMap 进行存储时，如果 size 超过当前最大容量*负载因子时候会发生 resize。
+其中调用 transfer() 方法时，将每个链表转化到新链表，并且链表中的位置发生反转。
+而这在多线程情况下是很容易造成链表回路，从而发生 get() 死循环。
 
+
+###### HashMap 和 HashTable 的区别
+- HashMap 是非 synchronized，而 HashTable 是 synchronized。HashTable 在每个方法调用上加了synchronized。
+- HashMap 是线程不安全的，HashTable是线程安全的。
+- 单线程环境下，HashMap 速度快。
+- HashMap不能保证随着时间的推移 Map 中的元素次序是不变的。
 
 ###### 线程安全的 ConcurrentHashMap
+- 并发安全
+- 直接支持一些原子复合操作
+- 支持高并发、读操作完全并行、写操作支持一定程度的并行
+- 与同步容器 Collections.synchronizedMap 相比，迭代不用加锁，不会抛出 ConcurrentModificationException
+- 弱一致性
 
 
 ###### Java8 对 HashMap 结构的优化 
 
+
+
+###### 参考
+[什么是HashMap](https://www.itcodemonkey.com/article/1109.html)
+
+[HashMap在高并发下引起的死循环](http://itindex.net/detail/53615-hashmap-%E5%B9%B6%E5%8F%91-%E6%AD%BB%E5%BE%AA%E7%8E%AF)
+
+[HashMap底层实现原理](http://www.cnblogs.com/beatIteWeNerverGiveUp/p/5709841.html)
+
+[Java8系列之重新认识HashMap](http://www.importnew.com/20386.html)
