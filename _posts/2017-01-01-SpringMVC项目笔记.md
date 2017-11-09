@@ -480,28 +480,46 @@ HashMap 默认的初始化长度是 16，并且每次自动扩展或手动初始
 为了实现高效的 Hash 算法，HashMap 采用了位运算的方式。 `index =  HashCode(Key) & (hashMap.Length - 1)`
 
 
-###### HashMap 在高并发下引起的死锁
-在 JDK1.7 环境下，使用HashMap 进行存储时，如果 size 超过当前最大容量*负载因子时候会发生 resize。
-其中调用 transfer() 方法时，将每个链表转化到新链表，并且链表中的位置发生反转。
-而这在多线程情况下是很容易造成链表回路，从而发生 get() 死循环。
-
-
 ###### HashMap 和 HashTable 的区别
 - HashMap 是非 synchronized，而 HashTable 是 synchronized。HashTable 在每个方法调用上加了synchronized。
 - HashMap 是线程不安全的，HashTable是线程安全的。
 - 单线程环境下，HashMap 速度快。
 - HashMap不能保证随着时间的推移 Map 中的元素次序是不变的。
 
+
+###### HashMap 在高并发下引起的死锁
+在 JDK1.7 环境下，使用HashMap 进行存储时，如果 size 超过当前最大容量*负载因子时候会发生 resize。
+其中调用 transfer() 方法时，将每个链表转化到新链表，并且链表中的位置发生反转。
+而这在多线程情况下是很容易造成链表回路，从而发生 get() 死循环。
+
+如何解决：
+- 使用 HashMap 的还有一个同步版本 HashTable
+- 使用 Collections.synchronizedMap 方法可以生成一个同步容器 
+- 使用 线程安全的 ConcurrentHashMap
+
+注意，同步容器有几个问题：
+- 每个方法都需要同步，支持的并发度比较低
+- 对于迭代和复合操作，需要调用方加锁，使用比较麻烦，且容易忘记
+
+
+
 ###### 线程安全的 ConcurrentHashMap
+优势：
 - 并发安全
 - 直接支持一些原子复合操作
 - 支持高并发、读操作完全并行、写操作支持一定程度的并行
 - 与同步容器 Collections.synchronizedMap 相比，迭代不用加锁，不会抛出 ConcurrentModificationException
 - 弱一致性
 
+实现原理：
+- 分段锁
+- 读不需要锁
+
 
 ###### Java8 对 HashMap 结构的优化 
-
+- 优化了扩容机制：resize()
+- 引入红黑树优化了 HashMap 的性能
+- 大大减少 getKey 的平均时间
 
 
 ###### 参考
