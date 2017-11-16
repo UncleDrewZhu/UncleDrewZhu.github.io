@@ -532,7 +532,8 @@ HashMap 默认的初始化长度是 16，并且每次自动扩展或手动初始
 [Java8系列之重新认识HashMap](http://www.importnew.com/20386.html)
 
 
-# volatile
+# 并发
+#### volatile
 volatile 变量通常用做某个操作完成、发生中断或者状态的标志。
 
 加锁机制既可以确保可见性又可以确保原子性，而 volatile 变量只能确保可见性。
@@ -541,4 +542,34 @@ volatile 变量通常用做某个操作完成、发生中断或者状态的标�
 - 对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。
 - 该变量不会与其它状态变量一起纳入不变性条件中。
 - 在访问变量时不需要加锁。
+
+#### 线程封闭
+- Ad-hoc 线程封闭：维护线程封闭性的职责完全由程序实现来承担。（技术较为脆弱，不推荐）
+- 栈封闭：是线程封闭的一种特例，在栈封闭中，只能通过局部变量才能访问对象。（比 Ad-hoc 更易于维护，也更加健壮）
+- ThreadLocal：使线程中的某个值与保存值的对象关联起来。get 和 set 方法
+
+###### ThreadLocal
+- ThreadLocal 中的 get 和 set 方法，为每个使用该变量的线程都存有一份独立的副本。
+- ThreadLocal 对象通常用于防止可变的单实例变量（singleton）或者全局变量共享。
+
+例如在单线程应用中维护一个全局的数据库连接：
+
+```
+private static ThreadLocal<Connection> connectionHolder = new ThreadLocal<Connection>() {
+    public Connection initialValue() {
+        return DriverManager.getConnection("url");
+    }
+};
+
+public static Connection getConnection() {
+    return connectionHolder.get();
+}
+```
+
+通过将 JDBC 的连接保存到 ThreadLocal 对象中，每个线程都会拥有属于自己的连接，保证线程安全。
+
+***注意：***
+
+- 不能滥用 ThreadLocal ，例如将所有的全局变量都作为 ThreadLocal 对象，或者作为一种隐藏方法参数的手段。
+- ThreadLocal 类似于全局变量，他能降低代码的可重用性，并在类之间引入隐含的耦合性，因此在使用时要格外小心。
 
