@@ -530,3 +530,15 @@ HashMap 默认的初始化长度是 16，并且每次自动扩展或手动初始
 [HashMap底层实现原理](http://www.cnblogs.com/beatIteWeNerverGiveUp/p/5709841.html)
 
 [Java8系列之重新认识HashMap](http://www.importnew.com/20386.html)
+
+
+# volatile
+volatile 变量通常用做某个操作完成、发生中断或者状态的标志。
+
+加锁机制既可以确保可见性又可以确保原子性，而 volatile 变量只能确保可见性。
+
+当且仅当满足以下所有条件时，才能使用 volatile 变量：
+- 对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。
+- 该变量不会与其它状态变量一起纳入不变性条件中。
+- 在访问变量时不需要加锁。
+
