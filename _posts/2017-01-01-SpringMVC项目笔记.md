@@ -573,3 +573,17 @@ public static Connection getConnection() {
 - 不能滥用 ThreadLocal ，例如将所有的全局变量都作为 ThreadLocal 对象，或者作为一种隐藏方法参数的手段。
 - ThreadLocal 类似于全局变量，他能降低代码的可重用性，并在类之间引入隐含的耦合性，因此在使用时要格外小心。
 
+#### 安全发布
+要安全发布一个对象，对象的引用和状态必须同时对其他线程可见。一个正确构造的对象可以通过以下几种方式来安全发布：
+- 在静态初始化汉函数中初始化一个对想引用
+- 将对象的引用保存到 volatile 类型的域或者 AtomicReferance 对象中
+- 将对象的引用保存到某个正确构造对象的 final 类型域中
+- 将对象的引用保存到一个由锁保护的域中
+
+线程安全的容器：
+- 将一个键或一个值放入 `HashTable,synchronizedMap,concurrentMap` 中
+- 将一个元素放入 `Vector,CopyOnWriteArrayList,CopyOnWriteArraySet,synchronizedList,synchronizedSet` 中
+
+线程安全的队列：
+- 将一个元素放入 `BlockingQueue,ConcurrentLinkedQueue` 中
+
