@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      CountDownLatch 简述
+title:      如何使用 CountDownLatch
 subtitle:   关于 CountDownLatch 的一些基础解释 
 date:       2017-11-24
 author:     uncledrew
