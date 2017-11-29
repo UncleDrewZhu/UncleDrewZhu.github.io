@@ -515,6 +515,20 @@ HashMap 默认的初始化长度是 16，并且每次自动扩展或手动初始
 - 分段锁
 - 读不需要锁
 
+读写的详细过程：二次定位
+
+Get 方法
+- 为输入的Key做Hash运算，得到hash值。
+- 通过hash值，定位到对应的Segment对象。
+- 再次通过hash值，定位到Segment当中数组的具体位置。
+
+Put 方法
+- 为输入的Key做Hash运算，得到hash值。
+- 通过hash值，定位到对应的Segment对象。
+- 获取可重入锁。
+- 再次通过hash值，定位到Segment当中数组的具体位置。
+- 插入或覆盖HashEntry对象。
+- 释放锁。
 
 ###### Java8 对 HashMap 结构的优化 
 - 优化了扩容机制：resize()
