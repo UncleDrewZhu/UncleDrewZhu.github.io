@@ -531,4 +531,4 @@ HashMap 默认的初始化长度是 16，并且每次自动扩展或手动初始
 
 [Java8系列之重新认识HashMap](http://www.importnew.com/20386.html)
 
-
+[什么是ConcurrentHashMap](https://www.itcodemonkey.com/article/1266.html)
