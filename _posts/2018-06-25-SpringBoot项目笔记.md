@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      SpringBoot 项目笔记
-subtitle:   关于 NIO 编程的一些学习记录
+subtitle:   记录一些自己对 SpringBoot 的认知和总结
 date:       2018-06-25
 author:     uncledrew
 header-img: img/post-bg-re-vs-ng2.jpg
@@ -20,3 +20,9 @@ tags:
 - 使配置变简单
 - 使部署变简单
 - 使监控变简单
+
+# AutoConfiguration 的原理
+- ConditionalOnClass
+- ConditionalOnMissingClass
+- ConditionalOnBean
+- ConditionalOnMissingBean
