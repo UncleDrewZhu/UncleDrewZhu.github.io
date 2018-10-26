@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://www.cnblogs.com/yuhuLin/p/7018858.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+<title>快速搭建ELK日志分析系统 - 于老三 - 博客园</title>
+<meta property="og:description" content="一、ELK搭建篇 官网地址:https://www.elastic.co/cn/ 官网权威指南:https://www.elastic.co/guide/cn/elasticsearch/guide/">
+<link type="text/css" rel="stylesheet" href="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/bundle-SimpleMemory.css">
+<link type="text/css" rel="stylesheet" href="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/360992.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/bundle-SimpleMemory-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yuhuLin/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yuhuLin/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yuhuLin/wlwmanifest.xml">
+<script src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/f.txt"></script><script src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/amp4ads-host-v0.js.下载"></script><script src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/pubads_impl_rendering_266.js.下载"></script><script async="" src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/analytics.js.下载"></script><script src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'yuhuLin', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<link rel="preload" href="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/f(1).txt" as="script"><script type="text/javascript" src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/f(1).txt"></script><script src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/pubads_impl_266.js.下载" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-30/html/container.html"></head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/yuhuLin/"><img id="blogLogo" src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/yuhuLin/">于老三</a></h1>
+<h2>欢迎加入技术交流群：190655608</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yuhuLin/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E4%BA%8E%E8%80%81%E4%B8%89">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yuhuLin/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/yuhuLin/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 12&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 2</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/yuhuLin/p/7018858.html">快速搭建ELK日志分析系统</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown"><h1 id="一elk搭建篇">一、ELK搭建篇</h1>
+<p>官网地址:https://www.elastic.co/cn/</p>
+<p>官网权威指南:https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html</p>
+<p>安装指南：https://www.elastic.co/guide/en/elasticsearch/reference/5.x/rpm.html</p>
+<p>ELK是Elasticsearch、Logstash、Kibana的简称，这三者是核心套件，但并非全部。</p>
+<p>Elasticsearch是实时全文搜索和分析引擎，提供搜集、分析、存储数据三大功能；是一套开放REST和JAVA API等结构提供高效搜索功能，可扩展的分布式系统。它构建于Apache Lucene搜索引擎库之上。</p>
+<p>Logstash是一个用来搜集、分析、过滤日志的工具。它支持几乎任何类型的日志，包括系统日志、错误日志和自定义应用程序日志。它可以从许多来源接收日志，这些来源包括 syslog、消息传递（例如 RabbitMQ）和JMX，它能够以多种方式输出数据，包括电子邮件、websockets和Elasticsearch。</p>
+<p>Kibana是一个基于Web的图形界面，用于搜索、分析和可视化存储在 Elasticsearch指标中的日志数据。它利用Elasticsearch的REST接口来检索数据，不仅允许用户创建他们自己的数据的定制仪表板视图，还允许他们以特殊的方式查询和过滤数据</p>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170755587-1541111347.jpg"></p>
+<h2 id="环境">环境</h2>
+<pre><code class="hljs css"><span class="hljs-selector-tag">Centos6</span><span class="hljs-selector-class">.5</span> 两台
+<span class="hljs-selector-tag">IP</span>：192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.1</span><span class="hljs-selector-class">.202</span> 安装： <span class="hljs-selector-tag">elasticsearch</span>、<span class="hljs-selector-tag">logstash</span>、<span class="hljs-selector-tag">Kibana</span>、<span class="hljs-selector-tag">Nginx</span>、<span class="hljs-selector-tag">Http</span>、<span class="hljs-selector-tag">Redis</span>
+    192<span class="hljs-selector-class">.168</span><span class="hljs-selector-class">.1</span><span class="hljs-selector-class">.201</span> 安装:  <span class="hljs-selector-tag">logstash</span></code></pre>
+<h2 id="安装">安装</h2>
+<pre><code class="hljs makefile">安装elasticsearch的yum源的密钥（这个需要在所有服务器上都配置）
+<span class="hljs-comment"># rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch</span>
+
+配置elasticsearch的yum源
+<span class="hljs-comment"># vim /etc/yum.repos.d/elasticsearch.repo</span>
+
+在elasticsearch.repo文件中添加如下内容
+[elasticsearch-5.x]
+name=Elasticsearch repository for 5.x packages
+baseurl=https://artifacts.elastic.co/packages/5.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md</code></pre>
+<h2 id="安装elasticsearch的环境">安装elasticsearch的环境</h2>
+<pre><code class="hljs awk">安装elasticsearch
+<span class="hljs-comment"># yum install -y elasticsearch</span>
+
+安装java环境(java环境必须是<span class="hljs-number">1.8</span>版本以上的)
+
+wget http:<span class="hljs-regexp">//</span>download.oracle.com<span class="hljs-regexp">/otn-pub/</span>java<span class="hljs-regexp">/jdk/</span><span class="hljs-number">8</span>u131-b11<span class="hljs-regexp">/d54c1d3a095b4ff2b6607d096fa80163/</span>jdk-<span class="hljs-number">8</span>u131-linux-x64.rpm
+
+rpm -ivh jdk-<span class="hljs-number">8</span>u131-linux-x64.rpm 
+
+验证java安装成功
+java -version
+java version <span class="hljs-string">"1.8.0_131"</span>
+Java(TM) SE Runtime Environment (build <span class="hljs-number">1.8</span>.<span class="hljs-number">0</span>_131-b11)
+Java HotSpot(TM) <span class="hljs-number">64</span>-Bit Server VM (build <span class="hljs-number">25.131</span>-b11, mixed mode)</code></pre>
+<p>创建elasticsearch data的存放目录，并修改该目录的属主属组</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> mkdir -p /data/es-data   (自定义用于存放data数据的目录)</span>
+<span class="hljs-meta">#</span><span class="bash"> chown -R elasticsearch:elasticsearch /data/es-data</span></code></pre>
+<p>修改elasticsearch的日志属主属组</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> chown -R elasticsearch:elasticsearch /var/<span class="hljs-built_in">log</span>/elasticsearch/</span></code></pre>
+<p>修改elasticsearch的配置文件</p>
+<pre><code class="hljs makefile"><span class="hljs-comment"># vim /etc/elasticsearch/elasticsearch.yml</span>
+
+找到配置文件中的cluster.name，打开该配置并设置集群名称
+<span class="hljs-section">cluster.name: demon</span>
+
+找到配置文件中的node.name，打开该配置并设置节点名称
+<span class="hljs-section">node.name: elk-1</span>
+
+修改data存放的路径
+<span class="hljs-section">path.data: /data/es-data</span>
+
+修改logs日志的路径
+<span class="hljs-section">path.logs: /var/log/elasticsearch/</span>
+
+配置内存使用用交换分区
+<span class="hljs-section">bootstrap.memory_lock: true</span>
+
+监听的网络地址
+<span class="hljs-section">network.host: 0.0.0.0</span>
+
+开启监听的端口
+<span class="hljs-section">http.port: 9200</span>
+
+增加新的参数，这样head插件可以访问es (5.x版本，如果没有可以自己手动加)
+<span class="hljs-section">http.cors.enabled: true</span>
+<span class="hljs-section">http.cors.allow-origin: "*"</span>
+启动elasticsearch服务</code></pre>
+<p>启动服务</p>
+<pre><code class="hljs vhdl"> /etc/init.d/elasticsearch start
+
+Starting elasticsearch: Java HotSpot(TM) <span class="hljs-number">64</span>-<span class="hljs-built_in">Bit</span> Server VM <span class="hljs-literal">warning</span>: INFO: os::commit_memory(<span class="hljs-number">0</span>x0000000085330000, <span class="hljs-number">2060255232</span>, <span class="hljs-number">0</span>) failed; <span class="hljs-literal">error</span>=<span class="hljs-symbol">'Cannot</span> allocate memory' (errno=<span class="hljs-number">12</span>)
+#
+# There <span class="hljs-keyword">is</span> insufficient memory <span class="hljs-keyword">for</span> the Java Runtime Environment <span class="hljs-keyword">to</span> continue.
+# Native memory allocation (mmap) failed <span class="hljs-keyword">to</span> <span class="hljs-keyword">map</span> <span class="hljs-number">2060255232</span> bytes <span class="hljs-keyword">for</span> committing reserved memory.
+# An <span class="hljs-literal">error</span> <span class="hljs-keyword">report</span> <span class="hljs-keyword">file</span> <span class="hljs-keyword">with</span> more information <span class="hljs-keyword">is</span> saved as:
+# /tmp/hs_err_pid2616.log
+                                                           [FAILED]
+这个报错是因为默认使用的内存大小为<span class="hljs-number">2</span>G，虚拟机没有那么多的空间
+
+修改参数：
+vim /etc/elasticsearch/jvm.options
+-Xms512m
+-Xmx512m
+
+再次启动
+/etc/init.d/elasticsearch start
+
+查看服务状态，如果有报错可以去看错误日志 less /var/log/elasticsearch/demon.log(日志的名称是以集群名称命名的)
+
+创建开机自启动服务
+# chkconfig elasticsearch <span class="hljs-keyword">on</span></code></pre>
+<h2 id="注意事项">注意事项</h2>
+<pre><code class="hljs markdown">需要修改几个参数，不然启动会报错
+
+vim /etc/security/limits.conf
+在末尾追加以下内容（elk为启动用户，当然也可以指定为*）
+elk soft nofile 65536
+elk hard nofile 65536
+elk soft nproc 2048
+elk hard nproc 2048
+elk soft memlock unlimited
+elk hard memlock unlimited
+
+继续再修改一个参数
+vim /etc/security/limits.d/90-nproc.conf
+将里面的1024改为2048（ES最少要求为2048）
+<span class="hljs-bullet">*          </span>soft    nproc     2048
+
+另外还需注意一个问题（在日志发现如下内容，这样也会导致启动失败，这一问题困扰了很久）
+[<span class="hljs-string">2017-06-14T19:19:01,641</span>][<span class="hljs-symbol">INFO </span>][<span class="hljs-string">o.e.b.BootstrapChecks    </span>] [elk-1] bound or publishing to a non-loopback or non-link-local address, enforcing bootstrap checks
+[<span class="hljs-string">2017-06-14T19:19:01,658</span>][<span class="hljs-symbol">ERROR</span>][<span class="hljs-string">o.e.b.Bootstrap          </span>] [elk-1] node validation exception
+[1] bootstrap checks failed
+[<span class="hljs-symbol">1</span>]: <span class="hljs-link">system call filters failed to install; check the logs and fix your configuration or disable system call filters at your own risk</span>
+<span class="hljs-code">    </span>
+解决：修改配置文件，在配置文件添加一项参数（目前还没明白此参数的作用）
+vim /etc/elasticsearch/elasticsearch.yml 
+bootstrap.system<span class="hljs-emphasis">_call_</span>filter: false</code></pre>
+<p>通过浏览器请求下9200的端口，看下是否成功</p>
+<pre><code class="hljs cpp">先检查<span class="hljs-number">9200</span>端口是否起来
+netstat -antp |grep <span class="hljs-number">9200</span>
+tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> :::<span class="hljs-number">9200</span>                     :::*                        LISTEN      <span class="hljs-number">2934</span>/java
+
+浏览器访问测试是否正常（以下为正常）
+<span class="hljs-meta"># curl http:<span class="hljs-comment">//127.0.0.1:9200/</span></span>
+{
+  <span class="hljs-string">"name"</span> : <span class="hljs-string">"linux-node1"</span>,
+  <span class="hljs-string">"cluster_name"</span> : <span class="hljs-string">"demon"</span>,
+  <span class="hljs-string">"cluster_uuid"</span> : <span class="hljs-string">"kM0GMFrsQ8K_cl5Fn7BF-g"</span>,
+  <span class="hljs-string">"version"</span> : {
+    <span class="hljs-string">"number"</span> : <span class="hljs-string">"5.4.0"</span>,
+    <span class="hljs-string">"build_hash"</span> : <span class="hljs-string">"780f8c4"</span>,
+    <span class="hljs-string">"build_date"</span> : <span class="hljs-string">"2017-04-28T17:43:27.229Z"</span>,
+    <span class="hljs-string">"build_snapshot"</span> : <span class="hljs-literal">false</span>,
+    <span class="hljs-string">"lucene_version"</span> : <span class="hljs-string">"6.5.0"</span>
+  },
+  <span class="hljs-string">"tagline"</span> : <span class="hljs-string">"You Know, for Search"</span>
+}</code></pre>
+<h2 id="如何和elasticsearch交互">如何和elasticsearch交互</h2>
+<pre><code class="hljs haskell"><span class="hljs-type">JavaAPI</span>
+
+<span class="hljs-type">RESTful</span> <span class="hljs-type">API</span>
+<span class="hljs-type">Javascript</span>,.<span class="hljs-type">Net</span>,<span class="hljs-type">PHP</span>,<span class="hljs-type">Perl</span>,<span class="hljs-type">Python</span>
+
+利用<span class="hljs-type">API</span>查看状态
+<span class="hljs-meta"># curl -i -XGET 'localhost:9200/_count?pretty' </span>
+    <span class="hljs-type">HTTP</span>/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> <span class="hljs-type">OK</span>
+    content-<span class="hljs-class"><span class="hljs-keyword">type</span>: application/json; charset=<span class="hljs-type">UTF</span>-8</span>
+    content-length: <span class="hljs-number">95</span>
+
+    {
+      <span class="hljs-string">"count"</span> : <span class="hljs-number">0</span>,
+      <span class="hljs-string">"_shards"</span> : {
+        <span class="hljs-string">"total"</span> : <span class="hljs-number">0</span>,
+        <span class="hljs-string">"successful"</span> : <span class="hljs-number">0</span>,
+        <span class="hljs-string">"failed"</span> : <span class="hljs-number">0</span>
+      }
+    }</code></pre>
+<h2 id="安装插件">安装插件</h2>
+<pre><code class="hljs cpp">安装elasticsearch-head插件
+
+安装docker镜像或者通过github下载elasticsearch-head项目都是可以的，<span class="hljs-number">1</span>或者<span class="hljs-number">2</span>两种方式选择一种安装使用即可
+
+<span class="hljs-number">1.</span> 使用docker的集成好的elasticsearch-head
+    <span class="hljs-meta"># docker run -p 9100:9100 mobz/elasticsearch-head:5</span>
+    
+    docker容器下载成功并启动以后，运行浏览器打开http:<span class="hljs-comment">//localhost:9100/</span>
+
+<span class="hljs-number">2.</span> 使用git安装elasticsearch-head
+    <span class="hljs-meta"># yum install -y npm</span>
+    <span class="hljs-meta"># git clone git:<span class="hljs-comment">//github.com/mobz/elasticsearch-head.git</span></span>
+    <span class="hljs-meta"># cd elasticsearch-head</span>
+    <span class="hljs-meta"># npm install</span>
+    <span class="hljs-meta"># npm run start</span>
+    检查端口是否起来
+    netstat -antp |grep <span class="hljs-number">9100</span>
+    浏览器访问测试是否正常
+    http:<span class="hljs-comment">//IP:9100/</span></code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170808446-1582541148.png"></p>
+<h2 id="logstash的使用">LogStash的使用</h2>
+<pre><code class="hljs shell">安装Logstash环境：
+
+官方安装手册:
+https://www.elastic.co/guide/en/logstash/current/installing-logstash.html
+
+下载yum源的密钥认证：
+<span class="hljs-meta">#</span><span class="bash"> rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch</span>
+
+利用yum安装logstash
+<span class="hljs-meta">#</span><span class="bash"> yum install -y logstash</span>
+
+查看下logstash的安装目录
+<span class="hljs-meta">#</span><span class="bash"> rpm -ql logstash</span>
+
+创建一个软连接，每次执行命令的时候不用在写安装路劲（默认安装在/usr/share下）
+ln -s /usr/share/logstash/bin/logstash /bin/
+
+执行logstash的命令
+<span class="hljs-meta">#</span><span class="bash"> logstash -e <span class="hljs-string">'input { stdin { } } output { stdout {} }'</span></span>
+
+运行成功以后输入:
+nihao
+
+stdout返回的结果:</code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170824884-1617614854.png"></p>
+<pre><code class="hljs lua">注:
+   -e          执行操作
+   <span class="hljs-built_in">input</span>       标准输入
+   { <span class="hljs-built_in">input</span> }   插件
+   <span class="hljs-built_in">output</span>      标准输出
+   { <span class="hljs-built_in">stdout</span> }  插件  
+
+通过rubydebug来输出下更详细的信息
+# logstash -e <span class="hljs-string">'input { stdin { } } output { stdout {codec =&gt; rubydebug} }'</span>
+
+执行成功输入:
+nihao
+
+<span class="hljs-built_in">stdout</span>输出的结果:</code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170838228-1637365021.png"></p>
+<pre><code class="hljs verilog">如果标准输出还有elasticsearch中都需要保留应该怎么玩，看下面
+# /usr/share/logstash/bin/logstash -e '<span class="hljs-keyword">input</span> { stdin { } } <span class="hljs-keyword">output</span> { elasticsearch { hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>] } stdout { codec =&gt; rubydebug }}'
+
+运行成功以后输入:
+I am elk
+
+返回的结果(标准输出中的结果):</code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170853587-1777231371.png"></p>
+<h2 id="logstash使用配置文件">logstash使用配置文件</h2>
+<pre><code class="hljs ruby">官方指南:
+<span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/www.elastic.co/guide</span><span class="hljs-regexp">/en/logstash</span><span class="hljs-regexp">/current/configuration</span>.html
+
+创建配置文件<span class="hljs-number">01</span>-logstash.conf
+<span class="hljs-comment"># vim /etc/logstash/conf.d/elk.conf</span>
+
+文件中添加以下内容
+input { stdin { } }
+output {
+  elasticsearch { hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>] }
+  stdout { codec =&gt; rubydebug }
+}
+
+使用配置文件运行logstash
+<span class="hljs-comment"># logstash -f ./elk.conf</span>
+
+运行成功以后输入以及标准输出结果</code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170905900-638904684.png"></p>
+<h2 id="logstash的数据库类型">logstash的数据库类型</h2>
+<pre><code class="hljs php"><span class="hljs-number">1.</span> Input插件
+    权威指南:https:<span class="hljs-comment">//www.elastic.co/guide/en/logstash/current/input-plugins.html</span>
+    
+    file插件的使用
+    <span class="hljs-comment"># vim /etc/logstash/conf.d/elk.conf</span>
+
+    添加如下配置
+    input {
+        file {
+            path =&gt; <span class="hljs-string">"/var/log/messages"</span>
+            type =&gt; <span class="hljs-string">"system"</span>
+            start_position =&gt; <span class="hljs-string">"beginning"</span>
+            }
+    }
+    output {    
+             elasticsearch {
+                    hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+                    index =&gt; <span class="hljs-string">"system-%{+YYYY.MM.dd}"</span>
+                }
+    }
+
+
+运行logstash指定elk.conf配置文件，进行过滤匹配
+<span class="hljs-comment">#logstash -f /etc/logstash/conf.d/elk.conf</span></code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170916775-655571206.png"></p>
+<p>来一发配置安全日志的并且把日志的索引按类型做存放，继续编辑elk.conf文件</p>
+<pre><code class="hljs php"><span class="hljs-comment"># vim /etc/logstash/conf.d/elk.conf</span>
+
+添加secure日志的路径
+input {
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/messages"</span>
+        type =&gt; <span class="hljs-string">"system"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }
+
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/secure"</span>
+        type =&gt; <span class="hljs-string">"secure"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }
+}
+
+output {
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"system"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-system-%{+YYYY.MM.dd}"</span>
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"secure"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-secure-%{+YYYY.MM.dd}"</span>
+        }
+    }
+}
+
+运行logstash指定elk.conf配置文件，进行过滤匹配
+<span class="hljs-comment"># logstash -f ./elk.conf </span></code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170928228-1645137078.png"></p>
+<p>这些设置都没有问题之后，接下来安装下kibana，可以让在前台展示</p>
+<h2 id="kibana的安装及使用">Kibana的安装及使用</h2>
+<pre><code class="hljs shell">安装kibana环境
+
+官方安装手册:https://www.elastic.co/guide/en/kibana/current/install.html
+
+下载kibana的tar.gz的软件包
+<span class="hljs-meta">#</span><span class="bash"> wget https://artifacts.elastic.co/downloads/kibana/kibana-5.4.0-linux-x86_64.tar.gz</span>
+
+解压kibana的tar包
+<span class="hljs-meta">#</span><span class="bash"> tar -xzf kibana-5.4.0-linux-x86_64.tar.gz</span>
+
+进入解压好的kibana
+<span class="hljs-meta">#</span><span class="bash"> mv kibana-5.4.0-linux-x86_64 /usr/<span class="hljs-built_in">local</span></span>
+
+创建kibana的软连接
+<span class="hljs-meta">#</span><span class="bash"> ln -s /usr/<span class="hljs-built_in">local</span>/kibana-5.4.0-linux-x86_64/ /usr/<span class="hljs-built_in">local</span>/kibana </span>
+
+编辑kibana的配置文件
+<span class="hljs-meta">#</span><span class="bash"> vim /usr/<span class="hljs-built_in">local</span>/kibana/config/kibana.yml</span>
+
+修改配置文件如下，开启以下的配置
+server.port: 5601
+
+server.host: "0.0.0.0"
+
+elasticsearch.url: "http://192.168.1.202:9200"
+
+kibana.index: ".kibana" 
+
+安装screen,以便于kibana在后台运行（当然也可以不用安装，用其他方式进行后台启动）
+<span class="hljs-meta">#</span><span class="bash"> yum -y install screen</span>
+<span class="hljs-meta">
+#</span><span class="bash"> screen</span>
+<span class="hljs-meta">
+#</span><span class="bash"> /usr/<span class="hljs-built_in">local</span>/kibana/bin/kibana</span>
+netstat -antp |grep 5601
+tcp        0      0 0.0.0.0:5601                0.0.0.0:*                   LISTEN      17007/node 
+
+打开浏览器并设置对应的index
+http://IP:5601</code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170938400-1045833173.png"></p>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615170944103-1284157218.png"></p>
+<h1 id="二elk实战篇">二、ELK实战篇</h1>
+<p>好，现在索引也可以创建了，现在可以来输出nginx、apache、message、secrue的日志到前台展示（Nginx有的话直接修改，没有自行安装）</p>
+<pre><code class="hljs powershell">编辑nginx配置文件，修改以下内容（在http模块下添加）
+
+log_format json <span class="hljs-string">'{"@timestamp":"$time_iso8601",'</span>
+             <span class="hljs-string">'"@version":"1",'</span>
+             <span class="hljs-string">'"client":"$remote_addr",'</span>
+             <span class="hljs-string">'"url":"$uri",'</span>
+             <span class="hljs-string">'"status":"$status",'</span>
+             <span class="hljs-string">'"domian":"$host",'</span>
+             <span class="hljs-string">'"host":"$server_addr",'</span>
+             <span class="hljs-string">'"size":"$body_bytes_sent",'</span>
+             <span class="hljs-string">'"responsetime":"$request_time",'</span>
+             <span class="hljs-string">'"referer":"$http_referer",'</span>
+             <span class="hljs-string">'"ua":"$http_user_agent"'</span>
+          <span class="hljs-string">'}'</span>;
+
+修改access_log的输出格式为刚才定义的json 
+access_log  logs/elk.access.log  json;
+
+继续修改apache的配置文件
+
+LogFormat <span class="hljs-string">"{ \
+        \"</span>@timestamp\<span class="hljs-string">": \"</span>%{%Y-%m-%dT%H:%M:%S%z}t\<span class="hljs-string">", \
+        \"</span>@version\<span class="hljs-string">": \"</span><span class="hljs-number">1</span>\<span class="hljs-string">", \
+        \"</span>tags\<span class="hljs-string">":[\"</span>apache\<span class="hljs-string">"], \
+        \"</span>message\<span class="hljs-string">": \"</span>%h %l %u %t \\\<span class="hljs-string">"%r\\\"</span> %&gt;s %b\<span class="hljs-string">", \
+        \"</span>clientip\<span class="hljs-string">": \"</span>%a\<span class="hljs-string">", \
+        \"</span>duration\<span class="hljs-string">": %D, \
+        \"</span>status\<span class="hljs-string">": %&gt;s, \
+        \"</span>request\<span class="hljs-string">": \"</span>%U%q\<span class="hljs-string">", \
+        \"</span>urlpath\<span class="hljs-string">": \"</span>%U\<span class="hljs-string">", \
+        \"</span>urlquery\<span class="hljs-string">": \"</span>%q\<span class="hljs-string">", \
+        \"</span>bytes\<span class="hljs-string">": %B, \
+        \"</span>method\<span class="hljs-string">": \"</span>%m\<span class="hljs-string">", \
+        \"</span>site\<span class="hljs-string">": \"</span>%{Host}i\<span class="hljs-string">", \
+        \"</span>referer\<span class="hljs-string">": \"</span>%{Referer}i\<span class="hljs-string">", \
+        \"</span>useragent\<span class="hljs-string">": \"</span>%{User-agent}i\<span class="hljs-string">" \
+       }"</span> ls_apache_json
+
+一样修改输出格式为上面定义的json格式
+CustomLog logs/access_log ls_apache_json
+
+编辑logstash配置文件，进行日志收集
+vim /etc/logstash/conf.d/full.conf
+
+    input {
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/messages"</span>
+        type =&gt; <span class="hljs-string">"system"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/secure"</span>
+        type =&gt; <span class="hljs-string">"secure"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/httpd/access_log"</span>
+        type =&gt; <span class="hljs-string">"http"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+
+    file {
+        path =&gt; <span class="hljs-string">"/usr/local/nginx/logs/elk.access.log"</span>
+        type =&gt; <span class="hljs-string">"nginx"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+
+}
+    
+output {
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"system"</span> { 
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-system-%{+YYYY.MM.dd}"</span>
+        }       
+    }   
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"secure"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-secure-%{+YYYY.MM.dd}"</span>
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"http"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-http-%{+YYYY.MM.dd}"</span>
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"nginx"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-nginx-%{+YYYY.MM.dd}"</span>
+        }
+    }
+
+}
+
+运行看看效果如何
+logstash -f /etc/logstash/conf.d/full.conf</code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615171002478-1596125301.png"></p>
+<p>可以发现所有创建日志的索引都已存在，接下来就去Kibana创建日志索引，进行展示（按照上面的方法进行创建索引即可），看下展示的效果<br>
+<img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615171010618-1450100637.png"></p>
+<p>接下来再来一发MySQL慢日志的展示</p>
+<pre><code class="hljs dart">由于MySQL的慢日志查询格式比较特殊，所以需要用正则进行匹配，并使用multiline能够进行多行匹配（看具体配置）
+input {
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/messages"</span>
+        type =&gt; <span class="hljs-string">"system"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/secure"</span>
+        type =&gt; <span class="hljs-string">"secure"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/httpd/access_log"</span>
+        type =&gt; <span class="hljs-string">"http"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+
+    file {
+        path =&gt; <span class="hljs-string">"/usr/local/nginx/logs/elk.access.log"</span>
+        type =&gt; <span class="hljs-string">"nginx"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }   
+    
+    file {
+        path =&gt; <span class="hljs-string">"/var/log/mysql/mysql.slow.log"</span>
+        type =&gt; <span class="hljs-string">"mysql"</span>
+        start_position =&gt; <span class="hljs-string">"beginning"</span>   
+    codec =&gt; multiline {
+            pattern =&gt; <span class="hljs-string">"^# User@Host:"</span>
+            negate =&gt; <span class="hljs-keyword">true</span>
+            what =&gt; <span class="hljs-string">"previous"</span>
+        }
+    }
+}
+
+filter {
+ 
+    grok {
+        match =&gt; { <span class="hljs-string">"message"</span> =&gt; <span class="hljs-string">"SELECT SLEEP"</span> }
+            add_tag =&gt; [ <span class="hljs-string">"sleep_drop"</span> ]
+            tag_on_failure =&gt; []
+    }
+ 
+ 
+    <span class="hljs-keyword">if</span> <span class="hljs-string">"sleep_drop"</span> <span class="hljs-keyword">in</span> [tags] {
+            drop {}
+    }
+    
+    grok {
+        match =&gt; { <span class="hljs-string">"message"</span> =&gt; <span class="hljs-string">"(?m)^# User@Host: %{USER:User}\[[^\]]+\] @ (?:(?&lt;clienthost&gt;\S*) )?\[(?:%{IP:Client_IP})?\]\s.*# Query_time: %{NUMBER:Query_Time:float}\s+Lock_time: %{NUMBER:Lock_Time:float}\s+Rows_sent: %{NUMBER:Rows_Sent:int}\s+Rows_examined: %{NUMBER:Rows_Examined:int}\s*(?:use %{DATA:Database};\s*)?SET timestamp=%{NUMBER:timestamp};\s*(?&lt;Query&gt;(?&lt;Action&gt;\w+)\s+.*)\n# Time:.*$"</span> }
+        }
+ 
+     date {
+            match =&gt; [ <span class="hljs-string">"timestamp"</span>, <span class="hljs-string">"UNIX"</span> ]
+            remove_field =&gt; [ <span class="hljs-string">"timestamp"</span> ]
+    }
+ 
+ 
+}
+
+
+   
+output {
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"system"</span> { 
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-system-%{+YYYY.MM.dd}"</span>
+        }       
+    }   
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"secure"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-secure-%{+YYYY.MM.dd}"</span>
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"http"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-http-%{+YYYY.MM.dd}"</span>
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"nginx"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-nginx-%{+YYYY.MM.dd}"</span>
+        }
+    }
+    
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"mysql"</span> {
+
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-mysql-slow-%{+YYYY.MM.dd}"</span>
+        }
+    }
+}</code></pre>
+<p>查看效果(一条慢日志查询会显示一条，如果不进行正则匹配，那么一行就会显示一条)<br>
+<img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615171024228-1048856012.png"></p>
+<p>具体的日志输出需求，进行具体的分析</p>
+<h1 id="三elk终极篇">三：ELK终极篇</h1>
+<pre><code class="hljs php">安装reids 
+<span class="hljs-comment"># yum install -y redis</span>
+
+修改redis的配置文件
+<span class="hljs-comment"># vim /etc/redis.conf</span>
+
+修改内容如下
+daemonize yes
+
+bind <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.202</span>
+
+启动redis服务
+<span class="hljs-comment"># /etc/init.d/redis restart</span>
+
+测试redis的是否启用成功
+<span class="hljs-comment"># redis-cli -h 192.168.1.202</span>
+
+输入info如果有不报错即可
+redis <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.202</span>:<span class="hljs-number">6379</span>&gt; info
+
+redis_version:<span class="hljs-number">2.4</span><span class="hljs-number">.10</span>
+....
+
+编辑配置redis-out.conf配置文件，把标准输入的数据存储到redis中
+<span class="hljs-comment"># vim /etc/logstash/conf.d/redis-out.conf</span>
+
+添加如下内容
+
+input {
+            stdin {}
+}
+
+output {
+
+        redis {
+                host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+                port =&gt; <span class="hljs-string">"6379"</span>
+                password =&gt; <span class="hljs-string">'test'</span>
+                db =&gt; <span class="hljs-string">'1'</span>
+                data_type =&gt; <span class="hljs-string">"list"</span>
+                key =&gt; <span class="hljs-string">'elk-test'</span>
+        }
+}   
+
+运行logstash指定redis-out.conf的配置文件
+<span class="hljs-comment"># /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/redis-out.conf</span></code></pre>
+<p>运行成功以后，在logstash中输入内容（查看下效果）</p>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615171035540-1353466323.png"></p>
+<pre><code class="hljs php">编辑配置redis-in.conf配置文件，把reids的存储的数据输出到elasticsearch中
+<span class="hljs-comment"># vim /etc/logstash/conf.d/redis-out.conf</span>
+
+添加如下内容
+input{
+    redis {
+                    host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+                    port =&gt; <span class="hljs-string">"6379"</span>
+                    password =&gt; <span class="hljs-string">'test'</span>
+                    db =&gt; <span class="hljs-string">'1'</span>
+                    data_type =&gt; <span class="hljs-string">"list"</span>
+                    key =&gt; <span class="hljs-string">'elk-test'</span>
+                    batch_count =&gt; <span class="hljs-number">1</span> <span class="hljs-comment">#这个值是指从队列中读取数据时，一次性取出多少条，默认125条（如果redis中没有125条，就会报错，所以在测试期间加上这个值）</span>
+            }
+
+}
+
+output {
+        elasticsearch {
+                hosts =&gt; [<span class="hljs-string">'192.168.1.202:9200'</span>]
+                index =&gt; <span class="hljs-string">'redis-test-%{+YYYY.MM.dd}'</span>
+        }
+}
+
+运行logstash指定redis-in.conf的配置文件
+<span class="hljs-comment"># /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/redis-out.conf</span></code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615171045118-662003146.png"></p>
+<pre><code class="hljs php">把之前的配置文件修改一下，变成所有的日志监控的来源文件都存放到redis中，然后通过redis在输出到elasticsearch中
+
+更改为如下，编辑full.conf
+input {
+    file {
+            path =&gt; <span class="hljs-string">"/var/log/httpd/access_log"</span>
+            type =&gt; <span class="hljs-string">"http"</span>
+            start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }
+
+    file {
+            path =&gt; <span class="hljs-string">"/usr/local/nginx/logs/elk.access.log"</span>
+            type =&gt; <span class="hljs-string">"nginx"</span>
+            start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }
+
+    file {
+            path =&gt; <span class="hljs-string">"/var/log/secure"</span>
+            type =&gt; <span class="hljs-string">"secure"</span>
+            start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }
+
+    file {
+            path =&gt; <span class="hljs-string">"/var/log/messages"</span>
+            type =&gt; <span class="hljs-string">"system"</span>
+            start_position =&gt; <span class="hljs-string">"beginning"</span>
+    }
+}
+
+
+output {
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"http"</span> {
+        redis {
+            host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+            password =&gt; <span class="hljs-string">'test'</span>
+            port =&gt; <span class="hljs-string">"6379"</span>
+            db =&gt; <span class="hljs-string">"6"</span>
+            data_type =&gt; <span class="hljs-string">"list"</span>
+            key =&gt; <span class="hljs-string">'nagios_http'</span> 
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"nginx"</span> {
+        redis {
+            host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+            password =&gt; <span class="hljs-string">'test'</span>
+            port =&gt; <span class="hljs-string">"6379"</span>
+            db =&gt; <span class="hljs-string">"6"</span>
+            data_type =&gt; <span class="hljs-string">"list"</span>
+            key =&gt; <span class="hljs-string">'nagios_nginx'</span> 
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"secure"</span> {
+        redis {
+            host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+            password =&gt; <span class="hljs-string">'test'</span>
+            port =&gt; <span class="hljs-string">"6379"</span>
+            db =&gt; <span class="hljs-string">"6"</span>
+            data_type =&gt; <span class="hljs-string">"list"</span>
+            key =&gt; <span class="hljs-string">'nagios_secure'</span> 
+        }
+    }
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"system"</span> {
+        redis {
+            host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+            password =&gt; <span class="hljs-string">'test'</span>
+            port =&gt; <span class="hljs-string">"6379"</span>
+            db =&gt; <span class="hljs-string">"6"</span>
+            data_type =&gt; <span class="hljs-string">"list"</span>
+            key =&gt; <span class="hljs-string">'nagios_system'</span> 
+        }
+    }
+} 
+
+
+运行logstash指定shipper.conf的配置文件
+<span class="hljs-comment"># /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/full.conf</span>
+
+在redis中查看是否已经将数据写到里面(有时候输入的日志文件不产生日志，会导致redis里面也没有写入日志)</code></pre>
+<p><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615171059712-519877548.png"></p>
+<pre><code class="hljs php">把redis中的数据读取出来，写入到elasticsearch中(需要另外一台主机做实验)
+
+编辑配置文件
+<span class="hljs-comment"># vim /etc/logstash/conf.d/redis-out.conf</span>
+
+添加如下内容
+input {
+    redis {
+        type =&gt; <span class="hljs-string">"system"</span>
+        host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+        password =&gt; <span class="hljs-string">'test'</span>
+        port =&gt; <span class="hljs-string">"6379"</span>
+        db =&gt; <span class="hljs-string">"6"</span>
+        data_type =&gt; <span class="hljs-string">"list"</span>
+        key =&gt; <span class="hljs-string">'nagios_system'</span> 
+    batch_count =&gt; <span class="hljs-number">1</span>
+     }
+    
+    redis {
+        type =&gt; <span class="hljs-string">"http"</span>
+        host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+        password =&gt; <span class="hljs-string">'test'</span>
+        port =&gt; <span class="hljs-string">"6379"</span>
+        db =&gt; <span class="hljs-string">"6"</span>
+        data_type =&gt; <span class="hljs-string">"list"</span>
+        key =&gt; <span class="hljs-string">'nagios_http'</span> 
+    batch_count =&gt; <span class="hljs-number">1</span>
+     }
+
+    redis {
+        type =&gt; <span class="hljs-string">"nginx"</span>
+        host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+        password =&gt; <span class="hljs-string">'test'</span>
+        port =&gt; <span class="hljs-string">"6379"</span>
+        db =&gt; <span class="hljs-string">"6"</span>
+        data_type =&gt; <span class="hljs-string">"list"</span>
+        key =&gt; <span class="hljs-string">'nagios_nginx'</span>
+    batch_count =&gt; <span class="hljs-number">1</span>
+     }
+    
+    redis {
+        type =&gt; <span class="hljs-string">"secure"</span>
+        host =&gt; <span class="hljs-string">"192.168.1.202"</span>
+        password =&gt; <span class="hljs-string">'test'</span>
+        port =&gt; <span class="hljs-string">"6379"</span>
+        db =&gt; <span class="hljs-string">"6"</span>
+        data_type =&gt; <span class="hljs-string">"list"</span>
+        key =&gt; <span class="hljs-string">'nagios_secure'</span> 
+    batch_count =&gt; <span class="hljs-number">1</span>
+    }
+}
+    
+output {
+    
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"system"</span> {
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-system-%{+YYYY.MM.dd}"</span>
+        }
+    }   
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"http"</span> {
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-http-%{+YYYY.MM.dd}"</span>
+        }   
+    }   
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"nginx"</span> {
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-nginx-%{+YYYY.MM.dd}"</span>
+        }   
+    }  
+
+    <span class="hljs-keyword">if</span> [type] == <span class="hljs-string">"secure"</span> {
+        elasticsearch {
+            hosts =&gt; [<span class="hljs-string">"192.168.1.202:9200"</span>]
+            index =&gt; <span class="hljs-string">"nagios-secure-%{+YYYY.MM.dd}"</span>
+        }   
+    }  
+}
+
+
+注意:
+input是从客户端收集的
+output是同样也保存到<span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.202</span>中的elasticsearch中，如果要保存到当前的主机上，可以把output中的hosts修改成localhost，如果还需要在kibana中显示，需要在本机上部署kabana，为何要这样做，起到一个松耦合的目的
+说白了，就是在客户端收集日志，写到服务端的redis里或是本地的redis里面，输出的时候对接ES服务器即可
+
+运行命令看看效果
+<span class="hljs-comment"># /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/redis-out.conf</span></code></pre>
+<p>效果是和直接往ES服务器输出一样的（这样是先将日志存到redis数据库，然后再从redis数据库里取出日志）<br>
+<img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/1181869-20170615171108993-934738573.png"></p>
+<h2 id="上线elk">上线ELK</h2>
+<pre><code class="hljs vhdl">１.　日志分类
+        系统日志        rsyslog     logstash    syslog插件
+        访问日志        nginx       logstash    codec   json
+        错误日志        <span class="hljs-keyword">file</span>        logstash    mulitline
+        运行日志        <span class="hljs-keyword">file</span>        logstash    codec   json
+        设备日志        syslog      logstash    syslog插件
+        Debug日志      <span class="hljs-keyword">file</span>         logstash   json 或者 mulitline  
+
+<span class="hljs-number">2</span>.  日志标准化
+        路径      固定
+        格式      尽量json
+
+<span class="hljs-number">3</span>.   系统个日志开始<span class="hljs-comment">--&gt;错误日志--&gt;运行日志--&gt;访问日志</span></code></pre>
+<p>因为ES保存日志是永久保存，所以需要定期删除一下日志，下面命令为删除指定时间前的日志</p>
+<pre><code class="hljs nginx"><span class="hljs-attribute">curl</span> -X DELETE http://xx.xx.com:9200/logstash-*-`date +%Y-%m-%d -d <span class="hljs-string">"-<span class="hljs-variable">$n</span> days"</span>`</code></pre>
+</div><div id="MySignature" style="display: block;">技术交流群：190655608</div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag">标签: <a href="https://www.cnblogs.com/yuhuLin/tag/ELK%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E7%AC%94%E8%AE%B0/">ELK学习过程笔记</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(7018858,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;ba73416f-dd49-47da-38eb-08d4a8d9e085&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/yuhuLin/" target="_blank"><img src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/20170616142315.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/yuhuLin/">于老三</a><br>
+            <a href="http://home.cnblogs.com/u/yuhuLin/followees">关注 - 0</a><br>
+            <a href="http://home.cnblogs.com/u/yuhuLin/followers">粉丝 - 9</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;ba73416f-dd49-47da-38eb-08d4a8d9e085&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(7018858,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">7</span>
+    </div>
+    <div class="buryit" onclick="votePost(7018858,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/yuhuLin/p/7025846.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/yuhuLin/p/7025846.html" title="发布于2017-06-16 09:21">Centos6.5下搭建nagios详解</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2017-06-15 17:07</span> <a href="https://www.cnblogs.com/yuhuLin/">于老三</a> 阅读(<span id="post_view_count">36405</span>) 评论(<span id="post_comment_count">1</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7018858" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/yuhuLin/p/7018858.html#" onclick="AddToWz(7018858);return false;">收藏</a></div>
+	</div>
+	<script src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/highlight.min.js.下载"></script><script>markdown_highlight();</script><script type="text/javascript">var allowComments=true,cb_blogId=360992,cb_entryId=7018858,cb_blogApp=currentBlogApp,cb_blogUserGuid='ba73416f-dd49-47da-38eb-08d4a8d9e085',cb_entryCreatedDate='2017/6/15 17:07:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/yuhuLin/p/7018858.html#4050102" class="layer">#1楼</a><a name="4050102" id="comment_anchor_4050102"></a><span id="comment-maxId" style="display:none;">4050102</span><span id="comment-maxDate" style="display:none;">2018/8/24 17:27:49</span>  <span class="comment_date">2018-08-24 17:27</span> <a id="a_comment_author_4050102" href="http://home.cnblogs.com/u/1367710/" target="_blank">阁楼上的灯</a> <a href="http://msg.cnblogs.com/send/%E9%98%81%E6%A5%BC%E4%B8%8A%E7%9A%84%E7%81%AF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4050102" class="blog_comment_body">太赞了，感谢楼主！！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4050102,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4050102,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/yuhuLin/p/7018858.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/yuhuLin/p/7018858.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="http://clickc.admaster.com.cn/c/a116493,b2949399,c1705,i0,m101,8a1,8b3,h" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-华为云&#39;)">【推荐】华为云11.11普惠季 血拼风暴 一促即发</a><br><a href="https://group.cnblogs.com/topic/80253.html" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-拼团&#39;)">【拼团】腾讯云服务器拼团活动又双叒叕来了！</a><br><a href="https://cloud.tencent.com/act/domainsales?fromSource=gwzcw.1351351.1351351.1351351" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-域名&#39;)">【推荐】腾讯云新注册用户域名抢购1元起</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://cloud.tencent.com/act/pro/redis?fromSource=gwzcw.1559146.1559146.1559146" target="_blank"><img width="300" height="250" src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/24442-20181023123922818-1967472495.jpg" alt="腾讯云1023" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/610549/" target="_blank">谷歌三季度收入未达预期 盘后跌超5%</a><br> ·  <a href="https://news.cnblogs.com/n/610548/" target="_blank">雷军：人工智能时代IoT成新突破口</a><br> ·  <a href="https://news.cnblogs.com/n/610547/" target="_blank">马斯克的春天：特斯拉上市8年来第三次“单季度盈利”</a><br> ·  <a href="https://news.cnblogs.com/n/610546/" target="_blank">大脑睡与醒的“调控开关”找到</a><br> ·  <a href="https://news.cnblogs.com/n/610545/" target="_blank">英特尔第三季度净利润64亿美元 同比增长42%</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<script async="async" src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/gpt.js.下载"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c2" class="c_ad_block">
+    <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="CM6Hs7-Bo94CFZOCvQod1C8ISg">
+    <script>
+    if (new Date() >= new Date(2018, 9, 13)) {
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1539008685004-0'); });
+    }
+    </script>
+    <div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-load-complete="true" src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/saved_resource.html"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="https://kb.cnblogs.com/page/609730/" target="_blank">阿里云的这群疯子</a><br> ·  <a href="https://kb.cnblogs.com/page/606682/" target="_blank">为什么说 Java 程序员必须掌握 Spring Boot ？</a><br> ·  <a href="https://kb.cnblogs.com/page/606645/" target="_blank">在学习中，有一个比掌握知识更重要的能力</a><br> ·  <a href="https://kb.cnblogs.com/page/603663/" target="_blank">如何招到一个靠谱的程序员</a><br> ·  <a href="https://kb.cnblogs.com/page/573614/" target="_blank">一个故事看懂“区块链”</a><br></div>» <a href="https://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news">认真刻苦的现在，只为更好的将来!<div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/yuhuLin/">于老三</a><br>园龄：<a href="https://home.cnblogs.com/u/yuhuLin/" title="入园时间：2017-06-13">1年4个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/yuhuLin/followers/">9</a><br>关注：<a href="https://home.cnblogs.com/u/yuhuLin/followees/">0</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;ba73416f-dd49-47da-38eb-08d4a8d9e085&#39;)">+加关注</a></div><script>getFollowStatus('ba73416f-dd49-47da-38eb-08d4a8d9e085')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/09/01&#39;);return false;">&lt;</a></td><td align="center">2018年10月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/11/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">30</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td class="CalWeekendDay" align="center">6</td></tr><tr><td class="CalWeekendDay" align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td class="CalWeekendDay" align="center">13</td></tr><tr><td class="CalWeekendDay" align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td class="CalWeekendDay" align="center">20</td></tr><tr><td class="CalWeekendDay" align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td class="CalTodayDay" align="center">26</td><td class="CalWeekendDay" align="center">27</td></tr><tr><td class="CalWeekendDay" align="center">28</td><td align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td></tr><tr><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block"></div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/yuhuLin/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="https://www.cnblogs.com/yuhuLin/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="https://www.cnblogs.com/yuhuLin/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="https://www.cnblogs.com/yuhuLin/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="https://www.cnblogs.com/yuhuLin/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/yuhuLin/tag/%E5%B0%8F%E7%99%BD%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">小白学习笔记</a>(5)</li><li><a href="https://www.cnblogs.com/yuhuLin/tag/Python/">Python</a>(4)</li><li><a href="https://www.cnblogs.com/yuhuLin/tag/apache/">apache</a>(1)</li><li><a href="https://www.cnblogs.com/yuhuLin/tag/ELK%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E7%AC%94%E8%AE%B0/">ELK学习过程笔记</a>(1)</li><li><a href="https://www.cnblogs.com/yuhuLin/tag/Mysql/">Mysql</a>(1)</li><li><a href="https://www.cnblogs.com/yuhuLin/tag/nagios/">nagios</a>(1)</li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/yuhuLin/archive/2018/08.html">2018年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/yuhuLin/archive/2017/11.html">2017年11月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/yuhuLin/archive/2017/06.html">2017年6月 (9)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	11134
+	</li>
+	<li class="liRank">
+		排名 -	38947
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/yuhuLin/p/7018858.html#4050102">1. Re:快速搭建ELK日志分析系统</a></li>
+        <li class="recent_comment_body">太赞了，感谢楼主！！！</li>
+        <li class="recent_comment_author">--阁楼上的灯</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/yuhuLin/p/7027342.html#4049735">2. Re:Linux中普通用户提权为超级用户</a></li>
+        <li class="recent_comment_body">厉害了</li>
+        <li class="recent_comment_author">--楚韩技术</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/yuhuLin/p/7018858.html">1. 快速搭建ELK日志分析系统(36388)</a></li><li><a href="https://www.cnblogs.com/yuhuLin/p/7027253.html">2. Linux中利用extundelete恢复误删除的数据(6495)</a></li><li><a href="https://www.cnblogs.com/yuhuLin/p/7027342.html">3. Linux中普通用户提权为超级用户(4473)</a></li><li><a href="https://www.cnblogs.com/yuhuLin/p/7025859.html">4. Centos6.5下升级Python版本(872)</a></li><li><a href="https://www.cnblogs.com/yuhuLin/p/MySQLdb.html">5. python2.7中MySQLdb的安装与使用详解(475)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/yuhuLin/p/7027342.html">1. Linux中普通用户提权为超级用户(1)</a></li><li><a href="https://www.cnblogs.com/yuhuLin/p/7018858.html">2. 快速搭建ELK日志分析系统(1)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/yuhuLin/p/7018858.html">1. 快速搭建ELK日志分析系统(7)</a></li><li><a href="https://www.cnblogs.com/yuhuLin/p/7027342.html">2. Linux中普通用户提权为超级用户(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 于老三
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+<iframe id="google_osd_static_frame_7350994012050" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./快速搭建ELK日志分析系统 - 于老三 - 博客园_files/saved_resource(1).html"></iframe></body></html>
